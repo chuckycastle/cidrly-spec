@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chuckycastle/cidrly-spec/schema/plan-v2.schema.json",
+  "title": "cidrly network plan (schema version 2)",
+  "type": "object",
+  "required": ["name", "baseIp", "subnets", "createdAt", "updatedAt"],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": { "type": "integer", "const": 2 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "baseIp": { "$ref": "#/$defs/ipv4" },
+    "growthPercentage": { "type": "integer", "minimum": 0, "maximum": 300, "default": 100 },
+    "allocationMode": { "type": "string", "enum": ["vlsm", "flsm"], "default": "vlsm" },
+    "minimumSubnetMask": { "type": "integer", "minimum": 0, "maximum": 32 },
+    "subnets": { "type": "array", "items": { "$ref": "#/$defs/subnet" } },
+    "assignedBlocks": { "type": "array", "items": { "$ref": "#/$defs/assignedBlock" } },
+    "supernet": { "$ref": "#/$defs/supernet" },
+    "spaceReport": {
+      "type": "object",
+      "description": "Derived. Accepted for compatibility with v1 writers; ignored by readers."
+    },
+    "createdAt": { "$ref": "#/$defs/timestamp" },
+    "updatedAt": { "$ref": "#/$defs/timestamp" }
+  },
+  "$defs": {
+    "ipv4": {
+      "type": "string",
+      "pattern": "^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}$"
+    },
+    "cidr": {
+      "type": "string",
+      "pattern": "^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])(\\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}/([0-9]|[12][0-9]|3[0-2])$"
+    },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "subnet": {
+      "type": "object",
+      "required": ["id", "name", "vlanId", "expectedDevices"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "vlanId": { "type": "integer", "minimum": 1, "maximum": 4094 },
+        "expectedDevices": { "type": "integer", "minimum": 1, "maximum": 16777214 },
+        "description": { "type": "string", "maxLength": 200 },
+        "networkLocked": { "type": "boolean", "default": false },
+        "manualNetworkAddress": { "$ref": "#/$defs/cidr" },
+        "sourceBlockId": { "type": "string" },
+        "subnetInfo": { "$ref": "#/$defs/subnetInfo" }
+      }
+    },
+    "subnetInfo": {
+      "type": "object",
+      "required": [
+        "expectedDevices",
+        "plannedDevices",
+        "requiredHosts",
+        "subnetSize",
+        "cidrPrefix",
+        "usableHosts"
+      ],
+      "properties": {
+        "expectedDevices": { "type": "integer", "minimum": 1, "maximum": 16777214 },
+        "plannedDevices": { "type": "integer", "minimum": 1, "maximum": 33554428 },
+        "requiredHosts": { "type": "integer", "minimum": 1 },
+        "subnetSize": { "type": "integer", "minimum": 1 },
+        "cidrPrefix": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "usableHosts": { "type": "integer", "minimum": 0 },
+        "networkAddress": { "$ref": "#/$defs/cidr" }
+      }
+    },
+    "assignedBlock": {
+      "type": "object",
+      "required": [
+        "id",
+        "networkAddress",
+        "cidrPrefix",
+        "totalCapacity",
+        "startInt",
+        "endInt",
+        "assignedAt"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "networkAddress": { "$ref": "#/$defs/cidr" },
+        "cidrPrefix": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "totalCapacity": { "type": "integer", "minimum": 1 },
+        "startInt": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "endInt": { "type": "integer", "minimum": 0, "maximum": 4294967295 },
+        "label": { "type": "string", "maxLength": 100 },
+        "assignedAt": { "$ref": "#/$defs/timestamp" }
+      }
+    },
+    "supernet": {
+      "type": "object",
+      "required": ["cidrPrefix", "totalSize", "usedSize", "networkAddress"],
+      "properties": {
+        "cidrPrefix": { "type": "integer", "minimum": 0, "maximum": 32 },
+        "totalSize": { "type": "integer", "minimum": 1 },
+        "usedSize": { "type": "integer", "minimum": 1 },
+        "utilization": { "type": "number", "minimum": 0 },
+        "efficiency": {
+          "type": "number",
+          "minimum": 0,
+          "description": "v1 name for utilization; readers migrate it"
+        },
+        "rangeEfficiency": { "type": "number", "minimum": 0, "maximum": 100, "default": 100 },
+        "networkAddress": { "$ref": "#/$defs/cidr" }
+      }
+    }
+  }
+}

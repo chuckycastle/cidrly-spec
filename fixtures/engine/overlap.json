@@ -1,0 +1,102 @@
+{
+  "description": "Pairwise overlap detection with complete/partial classification",
+  "cases": [
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/24",
+          "10.0.1.0/24"
+        ]
+      },
+      "expected": {
+        "hasOverlap": false,
+        "conflicts": []
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/24",
+          "10.0.0.128/25"
+        ]
+      },
+      "expected": {
+        "hasOverlap": true,
+        "conflicts": [
+          {
+            "subnet1": "10.0.0.0/24",
+            "subnet2": "10.0.0.128/25",
+            "overlapType": "complete"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/25",
+          "10.0.0.64/26",
+          "10.0.0.96/27"
+        ]
+      },
+      "expected": {
+        "hasOverlap": true,
+        "conflicts": [
+          {
+            "subnet1": "10.0.0.0/25",
+            "subnet2": "10.0.0.64/26",
+            "overlapType": "complete"
+          },
+          {
+            "subnet1": "10.0.0.0/25",
+            "subnet2": "10.0.0.96/27",
+            "overlapType": "complete"
+          },
+          {
+            "subnet1": "10.0.0.64/26",
+            "subnet2": "10.0.0.96/27",
+            "overlapType": "complete"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "192.168.0.0/16",
+          "192.168.10.0/24",
+          "10.0.0.0/8"
+        ]
+      },
+      "expected": {
+        "hasOverlap": true,
+        "conflicts": [
+          {
+            "subnet1": "192.168.0.0/16",
+            "subnet2": "192.168.10.0/24",
+            "overlapType": "complete"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/23",
+          "10.0.1.0/24",
+          "10.0.2.0/24"
+        ]
+      },
+      "expected": {
+        "hasOverlap": true,
+        "conflicts": [
+          {
+            "subnet1": "10.0.0.0/23",
+            "subnet2": "10.0.1.0/24",
+            "overlapType": "complete"
+          }
+        ]
+      }
+    }
+  ]
+}

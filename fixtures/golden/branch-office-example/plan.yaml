@@ -1,0 +1,72 @@
+# cidrly Network Plan
+# Generated: <timestamp>
+# https://github.com/chuckycastle/cidrly
+
+name: "Branch Office Example"
+baseIp: "192.168.10.0"
+growthPercentage: 100
+metadata:
+  createdAt: "<timestamp>"
+  updatedAt: "<timestamp>"
+
+# Subnet Allocation
+subnets:
+  - id: "subnet-1"
+    name: "Office Workstations"
+    vlanId: 10
+    devices: 25
+    networkAddress: "192.168.10.0/26"
+    cidrPrefix: 26
+    maxHosts: 62
+    planned: 50
+    requiredHosts: 25
+    subnetSize: 64
+  - id: "subnet-2"
+    name: "VoIP Phones"
+    vlanId: 20
+    devices: 15
+    networkAddress: "192.168.10.64/27"
+    cidrPrefix: 27
+    maxHosts: 30
+    planned: 30
+    requiredHosts: 15
+    subnetSize: 32
+  - id: "subnet-3"
+    name: "Guest WiFi"
+    vlanId: 30
+    devices: 10
+    networkAddress: "192.168.10.96/27"
+    cidrPrefix: 27
+    maxHosts: 30
+    planned: 20
+    requiredHosts: 10
+    subnetSize: 32
+  - id: "subnet-4"
+    name: "Printers"
+    vlanId: 40
+    devices: 5
+    networkAddress: "192.168.10.128/28"
+    cidrPrefix: 28
+    maxHosts: 14
+    planned: 10
+    requiredHosts: 5
+    subnetSize: 16
+  - id: "subnet-5"
+    name: "Servers"
+    vlanId: 50
+    devices: 3
+    networkAddress: "192.168.10.144/29"
+    cidrPrefix: 29
+    maxHosts: 6
+    planned: 6
+    requiredHosts: 3
+    subnetSize: 8
+
+# Supernet Summary
+supernet:
+  networkAddress: "192.168.10.0/24"
+  cidrPrefix: 24
+  totalSize: 256
+  usedSize: 152
+  utilization: 59.375
+  rangeEfficiency: 100

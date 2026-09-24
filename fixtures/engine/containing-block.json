@@ -1,0 +1,83 @@
+{
+  "description": "Smallest CIDR-aligned block that contains every input network",
+  "cases": [
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/24"
+        ]
+      },
+      "expected": {
+        "networkAddress": "10.0.0.0/24",
+        "cidrPrefix": 24,
+        "size": 256
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.1.0/24",
+          "10.0.2.0/24"
+        ]
+      },
+      "expected": {
+        "networkAddress": "10.0.0.0/22",
+        "cidrPrefix": 22,
+        "size": 1024
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/25",
+          "10.0.0.128/27",
+          "10.0.0.160/28"
+        ]
+      },
+      "expected": {
+        "networkAddress": "10.0.0.0/24",
+        "cidrPrefix": 24,
+        "size": 256
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "192.168.0.0/24",
+          "192.168.1.0/24"
+        ]
+      },
+      "expected": {
+        "networkAddress": "192.168.0.0/23",
+        "cidrPrefix": 23,
+        "size": 512
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "10.0.0.0/24",
+          "192.168.1.0/24"
+        ]
+      },
+      "expected": {
+        "networkAddress": "0.0.0.0/0",
+        "cidrPrefix": 0,
+        "size": 4294967296
+      }
+    },
+    {
+      "input": {
+        "networks": [
+          "172.16.0.0/16",
+          "172.31.255.0/24"
+        ]
+      },
+      "expected": {
+        "networkAddress": "172.16.0.0/12",
+        "cidrPrefix": 12,
+        "size": 1048576
+      }
+    }
+  ]
+}

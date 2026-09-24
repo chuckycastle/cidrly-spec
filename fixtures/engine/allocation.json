@@ -1,0 +1,781 @@
+{
+  "description": "VLSM allocation: largest-first, boundary aligned, gap-aware around locked subnets. Expected subnets are sorted by id. Supernet is the containing block.",
+  "cases": [
+    {
+      "name": "aligned base, mixed sizes",
+      "input": {
+        "name": "aligned base, mixed sizes",
+        "baseIp": "10.0.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "Engineering",
+            "vlanId": 10,
+            "expectedDevices": 50,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "Sales",
+            "vlanId": 20,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "Guests",
+            "vlanId": 30,
+            "expectedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "s4",
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 4,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "10.0.1.0/25",
+            "cidrPrefix": 25,
+            "subnetSize": 128,
+            "plannedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "10.0.1.128/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "networkAddress": "10.0.0.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "s4",
+            "networkAddress": "10.0.1.160/28",
+            "cidrPrefix": 28,
+            "subnetSize": 16,
+            "plannedDevices": 8,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.0.0.0/23",
+          "cidrPrefix": 23,
+          "totalSize": 512,
+          "usedSize": 432,
+          "utilization": 84.375,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "unaligned base",
+      "input": {
+        "name": "unaligned base",
+        "baseIp": "10.0.1.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 20,
+            "expectedDevices": 100,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "10.0.1.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "10.0.2.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.0.0.0/22",
+          "cidrPrefix": 22,
+          "totalSize": 1024,
+          "usedSize": 512,
+          "utilization": 50,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "zero growth",
+      "input": {
+        "name": "zero growth",
+        "baseIp": "10.10.0.0",
+        "growthPercentage": 0,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 62,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 20,
+            "expectedDevices": 63,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "C",
+            "vlanId": 30,
+            "expectedDevices": 2,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "10.10.0.128/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 62,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "10.10.0.0/25",
+            "cidrPrefix": 25,
+            "subnetSize": 128,
+            "plannedDevices": 63,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "networkAddress": "10.10.0.192/30",
+            "cidrPrefix": 30,
+            "subnetSize": 4,
+            "plannedDevices": 2,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.10.0.0/24",
+          "cidrPrefix": 24,
+          "totalSize": 256,
+          "usedSize": 196,
+          "utilization": 76.5625,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "locked subnet in the middle",
+      "input": {
+        "name": "locked subnet in the middle",
+        "baseIp": "10.0.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "Locked",
+            "vlanId": 20,
+            "expectedDevices": 20,
+            "networkLocked": true,
+            "manualNetworkAddress": "10.0.1.0/26"
+          },
+          {
+            "id": "s3",
+            "name": "C",
+            "vlanId": 30,
+            "expectedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "s4",
+            "name": "D",
+            "vlanId": 40,
+            "expectedDevices": 10,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "10.0.0.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "10.0.1.0/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 40,
+            "networkLocked": true
+          },
+          {
+            "id": "s3",
+            "networkAddress": "10.0.2.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "s4",
+            "networkAddress": "10.0.3.0/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.0.0.0/22",
+          "cidrPrefix": 22,
+          "totalSize": 1024,
+          "usedSize": 608,
+          "utilization": 59.375,
+          "rangeEfficiency": 76
+        }
+      }
+    },
+    {
+      "name": "high half of address space",
+      "input": {
+        "name": "high half of address space",
+        "baseIp": "192.168.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 20,
+            "expectedDevices": 25,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "192.168.0.0/23",
+            "cidrPrefix": 23,
+            "subnetSize": 512,
+            "plannedDevices": 400,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "192.168.2.0/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 50,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "192.168.0.0/22",
+          "cidrPrefix": 22,
+          "totalSize": 1024,
+          "usedSize": 576,
+          "utilization": 56.25,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "172.16 base with 300% growth",
+      "input": {
+        "name": "172.16 base with 300% growth",
+        "baseIp": "172.16.0.0",
+        "growthPercentage": 300,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 100,
+            "expectedDevices": 300,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 200,
+            "expectedDevices": 30,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "C",
+            "vlanId": 300,
+            "expectedDevices": 3,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "172.16.0.0/21",
+            "cidrPrefix": 21,
+            "subnetSize": 2048,
+            "plannedDevices": 1200,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "172.16.8.0/25",
+            "cidrPrefix": 25,
+            "subnetSize": 128,
+            "plannedDevices": 120,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "networkAddress": "172.16.8.128/28",
+            "cidrPrefix": 28,
+            "subnetSize": 16,
+            "plannedDevices": 12,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "172.16.0.0/20",
+          "cidrPrefix": 20,
+          "totalSize": 4096,
+          "usedSize": 2192,
+          "utilization": 53.515625,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "ties sorted deterministically",
+      "input": {
+        "name": "ties sorted deterministically",
+        "baseIp": "10.20.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "Z",
+            "vlanId": 5,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "Y",
+            "vlanId": 4,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "X",
+            "vlanId": 3,
+            "expectedDevices": 10,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "s1",
+            "networkAddress": "10.20.0.0/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "networkAddress": "10.20.0.32/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "networkAddress": "10.20.0.64/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.20.0.0/25",
+          "cidrPrefix": 25,
+          "totalSize": 128,
+          "usedSize": 96,
+          "utilization": 75,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "Branch Office Example",
+      "input": {
+        "name": "Branch Office Example",
+        "baseIp": "192.168.10.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 25,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 5,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 50,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 30,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "subnetSize": 16,
+            "plannedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "subnetSize": 8,
+            "plannedDevices": 6,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "192.168.10.0/24",
+          "cidrPrefix": 24,
+          "totalSize": 256,
+          "usedSize": 152,
+          "utilization": 59.375,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "Campus Network Example",
+      "input": {
+        "name": "Campus Network Example",
+        "baseIp": "10.100.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 100,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 75,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 250,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 30,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 50,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 200,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "subnetSize": 256,
+            "plannedDevices": 150,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "subnetSize": 512,
+            "plannedDevices": 500,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 60,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "subnetSize": 128,
+            "plannedDevices": 100,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "10.100.0.0/21",
+          "cidrPrefix": 21,
+          "totalSize": 2048,
+          "usedSize": 1216,
+          "utilization": 59.375,
+          "rangeEfficiency": 100
+        }
+      }
+    },
+    {
+      "name": "Data Center Example",
+      "input": {
+        "name": "Data Center Example",
+        "baseIp": "172.16.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 30,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 8,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-6",
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 5,
+            "networkLocked": false
+          }
+        ]
+      },
+      "expected": {
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 40,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-2",
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "subnetSize": 64,
+            "plannedDevices": 60,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-3",
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 20,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-4",
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 30,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-5",
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "subnetSize": 32,
+            "plannedDevices": 16,
+            "networkLocked": false
+          },
+          {
+            "id": "subnet-6",
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "subnetSize": 16,
+            "plannedDevices": 10,
+            "networkLocked": false
+          }
+        ],
+        "supernet": {
+          "networkAddress": "172.16.0.0/24",
+          "cidrPrefix": 24,
+          "totalSize": 256,
+          "usedSize": 240,
+          "utilization": 93.75,
+          "rangeEfficiency": 100
+        }
+      }
+    }
+  ]
+}

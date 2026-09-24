@@ -1,0 +1,103 @@
+{
+  "description": "Auto-fit bin packing across available blocks",
+  "cases": [
+    {
+      "name": "pack three subnets into two blocks",
+      "input": {
+        "blocks": [
+          "10.1.241.0/24",
+          "10.1.242.0/25"
+        ],
+        "subnets": [
+          {
+            "id": "s1",
+            "vlanId": 10,
+            "expectedDevices": 100
+          },
+          {
+            "id": "s2",
+            "vlanId": 20,
+            "expectedDevices": 50
+          },
+          {
+            "id": "s3",
+            "vlanId": 30,
+            "expectedDevices": 50
+          }
+        ],
+        "growthPercentage": 100
+      },
+      "expected": {
+        "success": false,
+        "allocations": [
+          {
+            "subnetId": "s1",
+            "block": "10.1.241.0/24",
+            "networkAddress": "10.1.241.0/24"
+          },
+          {
+            "subnetId": "s2",
+            "block": "10.1.242.0/25",
+            "networkAddress": "10.1.242.0/25"
+          }
+        ],
+        "unallocatedSubnetIds": [
+          "s3"
+        ],
+        "blockUtilizations": [
+          {
+            "block": "10.1.241.0/24",
+            "usedCapacity": 256,
+            "utilizationPercent": 100
+          },
+          {
+            "block": "10.1.242.0/25",
+            "usedCapacity": 128,
+            "utilizationPercent": 100
+          }
+        ]
+      }
+    },
+    {
+      "name": "one subnet cannot be placed",
+      "input": {
+        "blocks": [
+          "10.1.241.0/26"
+        ],
+        "subnets": [
+          {
+            "id": "s1",
+            "vlanId": 10,
+            "expectedDevices": 10
+          },
+          {
+            "id": "s2",
+            "vlanId": 20,
+            "expectedDevices": 100
+          }
+        ],
+        "growthPercentage": 100
+      },
+      "expected": {
+        "success": false,
+        "allocations": [
+          {
+            "subnetId": "s1",
+            "block": "10.1.241.0/26",
+            "networkAddress": "10.1.241.0/27"
+          }
+        ],
+        "unallocatedSubnetIds": [
+          "s2"
+        ],
+        "blockUtilizations": [
+          {
+            "block": "10.1.241.0/26",
+            "usedCapacity": 32,
+            "utilizationPercent": 50
+          }
+        ]
+      }
+    }
+  ]
+}

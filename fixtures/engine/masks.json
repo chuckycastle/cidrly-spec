@@ -1,0 +1,335 @@
+{
+  "description": "Netmask and wildcard for every IPv4 prefix length",
+  "cases": [
+    {
+      "input": {
+        "prefix": 0
+      },
+      "expected": {
+        "netmask": "0.0.0.0",
+        "wildcard": "255.255.255.255",
+        "size": 4294967296
+      }
+    },
+    {
+      "input": {
+        "prefix": 1
+      },
+      "expected": {
+        "netmask": "128.0.0.0",
+        "wildcard": "127.255.255.255",
+        "size": 2147483648
+      }
+    },
+    {
+      "input": {
+        "prefix": 2
+      },
+      "expected": {
+        "netmask": "192.0.0.0",
+        "wildcard": "63.255.255.255",
+        "size": 1073741824
+      }
+    },
+    {
+      "input": {
+        "prefix": 3
+      },
+      "expected": {
+        "netmask": "224.0.0.0",
+        "wildcard": "31.255.255.255",
+        "size": 536870912
+      }
+    },
+    {
+      "input": {
+        "prefix": 4
+      },
+      "expected": {
+        "netmask": "240.0.0.0",
+        "wildcard": "15.255.255.255",
+        "size": 268435456
+      }
+    },
+    {
+      "input": {
+        "prefix": 5
+      },
+      "expected": {
+        "netmask": "248.0.0.0",
+        "wildcard": "7.255.255.255",
+        "size": 134217728
+      }
+    },
+    {
+      "input": {
+        "prefix": 6
+      },
+      "expected": {
+        "netmask": "252.0.0.0",
+        "wildcard": "3.255.255.255",
+        "size": 67108864
+      }
+    },
+    {
+      "input": {
+        "prefix": 7
+      },
+      "expected": {
+        "netmask": "254.0.0.0",
+        "wildcard": "1.255.255.255",
+        "size": 33554432
+      }
+    },
+    {
+      "input": {
+        "prefix": 8
+      },
+      "expected": {
+        "netmask": "255.0.0.0",
+        "wildcard": "0.255.255.255",
+        "size": 16777216
+      }
+    },
+    {
+      "input": {
+        "prefix": 9
+      },
+      "expected": {
+        "netmask": "255.128.0.0",
+        "wildcard": "0.127.255.255",
+        "size": 8388608
+      }
+    },
+    {
+      "input": {
+        "prefix": 10
+      },
+      "expected": {
+        "netmask": "255.192.0.0",
+        "wildcard": "0.63.255.255",
+        "size": 4194304
+      }
+    },
+    {
+      "input": {
+        "prefix": 11
+      },
+      "expected": {
+        "netmask": "255.224.0.0",
+        "wildcard": "0.31.255.255",
+        "size": 2097152
+      }
+    },
+    {
+      "input": {
+        "prefix": 12
+      },
+      "expected": {
+        "netmask": "255.240.0.0",
+        "wildcard": "0.15.255.255",
+        "size": 1048576
+      }
+    },
+    {
+      "input": {
+        "prefix": 13
+      },
+      "expected": {
+        "netmask": "255.248.0.0",
+        "wildcard": "0.7.255.255",
+        "size": 524288
+      }
+    },
+    {
+      "input": {
+        "prefix": 14
+      },
+      "expected": {
+        "netmask": "255.252.0.0",
+        "wildcard": "0.3.255.255",
+        "size": 262144
+      }
+    },
+    {
+      "input": {
+        "prefix": 15
+      },
+      "expected": {
+        "netmask": "255.254.0.0",
+        "wildcard": "0.1.255.255",
+        "size": 131072
+      }
+    },
+    {
+      "input": {
+        "prefix": 16
+      },
+      "expected": {
+        "netmask": "255.255.0.0",
+        "wildcard": "0.0.255.255",
+        "size": 65536
+      }
+    },
+    {
+      "input": {
+        "prefix": 17
+      },
+      "expected": {
+        "netmask": "255.255.128.0",
+        "wildcard": "0.0.127.255",
+        "size": 32768
+      }
+    },
+    {
+      "input": {
+        "prefix": 18
+      },
+      "expected": {
+        "netmask": "255.255.192.0",
+        "wildcard": "0.0.63.255",
+        "size": 16384
+      }
+    },
+    {
+      "input": {
+        "prefix": 19
+      },
+      "expected": {
+        "netmask": "255.255.224.0",
+        "wildcard": "0.0.31.255",
+        "size": 8192
+      }
+    },
+    {
+      "input": {
+        "prefix": 20
+      },
+      "expected": {
+        "netmask": "255.255.240.0",
+        "wildcard": "0.0.15.255",
+        "size": 4096
+      }
+    },
+    {
+      "input": {
+        "prefix": 21
+      },
+      "expected": {
+        "netmask": "255.255.248.0",
+        "wildcard": "0.0.7.255",
+        "size": 2048
+      }
+    },
+    {
+      "input": {
+        "prefix": 22
+      },
+      "expected": {
+        "netmask": "255.255.252.0",
+        "wildcard": "0.0.3.255",
+        "size": 1024
+      }
+    },
+    {
+      "input": {
+        "prefix": 23
+      },
+      "expected": {
+        "netmask": "255.255.254.0",
+        "wildcard": "0.0.1.255",
+        "size": 512
+      }
+    },
+    {
+      "input": {
+        "prefix": 24
+      },
+      "expected": {
+        "netmask": "255.255.255.0",
+        "wildcard": "0.0.0.255",
+        "size": 256
+      }
+    },
+    {
+      "input": {
+        "prefix": 25
+      },
+      "expected": {
+        "netmask": "255.255.255.128",
+        "wildcard": "0.0.0.127",
+        "size": 128
+      }
+    },
+    {
+      "input": {
+        "prefix": 26
+      },
+      "expected": {
+        "netmask": "255.255.255.192",
+        "wildcard": "0.0.0.63",
+        "size": 64
+      }
+    },
+    {
+      "input": {
+        "prefix": 27
+      },
+      "expected": {
+        "netmask": "255.255.255.224",
+        "wildcard": "0.0.0.31",
+        "size": 32
+      }
+    },
+    {
+      "input": {
+        "prefix": 28
+      },
+      "expected": {
+        "netmask": "255.255.255.240",
+        "wildcard": "0.0.0.15",
+        "size": 16
+      }
+    },
+    {
+      "input": {
+        "prefix": 29
+      },
+      "expected": {
+        "netmask": "255.255.255.248",
+        "wildcard": "0.0.0.7",
+        "size": 8
+      }
+    },
+    {
+      "input": {
+        "prefix": 30
+      },
+      "expected": {
+        "netmask": "255.255.255.252",
+        "wildcard": "0.0.0.3",
+        "size": 4
+      }
+    },
+    {
+      "input": {
+        "prefix": 31
+      },
+      "expected": {
+        "netmask": "255.255.255.254",
+        "wildcard": "0.0.0.1",
+        "size": 2
+      }
+    },
+    {
+      "input": {
+        "prefix": 32
+      },
+      "expected": {
+        "netmask": "255.255.255.255",
+        "wildcard": "0.0.0.0",
+        "size": 1
+      }
+    }
+  ]
+}

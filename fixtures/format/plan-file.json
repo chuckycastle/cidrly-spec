@@ -1,0 +1,81 @@
+{
+  "description": "Plan file parsing rules: defaults for v1 files, legacy field migration, and preservation of unknown fields",
+  "currentSchemaVersion": 2,
+  "cases": [
+    {
+      "name": "v1 file without growthPercentage or rangeEfficiency; legacy efficiency",
+      "input": {
+        "name": "Legacy",
+        "baseIp": "10.0.0.0",
+        "subnets": [
+          {
+            "id": "subnet-1",
+            "name": "Users",
+            "vlanId": 10,
+            "expectedDevices": 50,
+            "subnetInfo": {
+              "expectedDevices": 50,
+              "plannedDevices": 100,
+              "requiredHosts": 50,
+              "subnetSize": 128,
+              "cidrPrefix": 25,
+              "usableHosts": 126,
+              "networkAddress": "10.0.0.0/25"
+            }
+          }
+        ],
+        "supernet": {
+          "cidrPrefix": 25,
+          "totalSize": 128,
+          "usedSize": 128,
+          "efficiency": 100,
+          "networkAddress": "10.0.0.0/25"
+        },
+        "createdAt": "2025-06-01T00:00:00.000Z",
+        "updatedAt": "2025-06-01T00:00:00.000Z"
+      },
+      "expected": {
+        "growthPercentage": 100,
+        "subnetsNetworkLocked": [
+          false
+        ],
+        "supernetUtilization": 100,
+        "supernetRangeEfficiency": 100
+      }
+    },
+    {
+      "name": "v2 file with fields this client does not understand",
+      "input": {
+        "schemaVersion": 2,
+        "name": "From app",
+        "baseIp": "10.0.0.0",
+        "growthPercentage": 50,
+        "subnets": [],
+        "createdAt": "2026-01-01T00:00:00.000Z",
+        "updatedAt": "2026-01-01T00:00:00.000Z",
+        "tags": [
+          "campus"
+        ],
+        "reservations": [
+          {
+            "address": "10.0.0.1",
+            "purpose": "gateway"
+          }
+        ]
+      },
+      "expected": {
+        "preservedFields": {
+          "tags": [
+            "campus"
+          ],
+          "reservations": [
+            {
+              "address": "10.0.0.1",
+              "purpose": "gateway"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# Plan Metadata
+# name: Branch Office Example
+# baseIp: 192.168.10.0
+# growthPercentage: 100
+# createdAt: <timestamp>
+# updatedAt: <timestamp>
+
+# Subnet Allocation
+name,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address
+Office Workstations,10,25,,192.168.10.0,26,62,50,64,25,false,
+VoIP Phones,20,15,,192.168.10.64,27,30,30,32,15,false,
+Guest WiFi,30,10,,192.168.10.96,27,30,20,32,10,false,
+Printers,40,5,,192.168.10.128,28,14,10,16,5,false,
+Servers,50,3,,192.168.10.144,29,6,6,8,3,false,
+
+# Supernet Summary
+# supernet.networkAddress: 192.168.10.0/24
+# supernet.cidrPrefix: 24
+# supernet.totalSize: 256
+# supernet.usedSize: 152
+# supernet.utilization: 59.38
+# supernet.rangeEfficiency: 100.00

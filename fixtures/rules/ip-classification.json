@@ -1,0 +1,238 @@
+{
+  "description": "Reserved (RFC 5735/6890) and private (RFC 1918) classification",
+  "cases": [
+    {
+      "input": {
+        "ip": "0.0.0.0"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "This network"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "10.0.0.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": true,
+          "description": "Class A private"
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "127.0.0.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "Loopback"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "169.254.1.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "Link-local"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "172.15.255.255"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "172.16.0.0"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": true,
+          "description": "Class B private"
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "172.31.255.255"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": true,
+          "description": "Class B private"
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "172.32.0.0"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "192.0.2.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "TEST-NET-1"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "192.168.1.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": true,
+          "description": "Class C private"
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "198.18.0.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "198.51.100.7"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "TEST-NET-2"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "203.0.113.9"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "TEST-NET-3"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "224.0.0.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "240.0.0.1"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "Reserved for future use"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "255.255.255.255"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": true,
+          "description": "Reserved for future use"
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    },
+    {
+      "input": {
+        "ip": "8.8.8.8"
+      },
+      "expected": {
+        "reserved": {
+          "isReserved": false
+        },
+        "private": {
+          "isPrivate": false
+        }
+      }
+    }
+  ]
+}

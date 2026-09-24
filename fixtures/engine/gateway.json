@@ -1,0 +1,77 @@
+{
+  "description": "Default gateway used by vendor exports: network + 1 for /30 and larger; the network address itself for /31 and /32",
+  "cases": [
+    {
+      "input": {
+        "networkAddress": "10.0.0.0/24"
+      },
+      "expected": {
+        "gateway": "10.0.0.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.128/25"
+      },
+      "expected": {
+        "gateway": "10.0.0.129"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.64/26"
+      },
+      "expected": {
+        "gateway": "10.0.0.65"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.4/30"
+      },
+      "expected": {
+        "gateway": "10.0.0.5"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.2.0/23"
+      },
+      "expected": {
+        "gateway": "10.0.2.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "172.16.0.0/12"
+      },
+      "expected": {
+        "gateway": "172.16.0.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "192.168.10.192/27"
+      },
+      "expected": {
+        "gateway": "192.168.10.193"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.0/31"
+      },
+      "expected": {
+        "gateway": "10.0.0.0"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.5/32"
+      },
+      "expected": {
+        "gateway": "10.0.0.5"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1565 @@
+{
+  "description": "Subnet sizing: planned = ceil(expected * (1 + growth/100)); host bits = smallest n with 2^n >= planned + 2",
+  "cases": [
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 1,
+        "hostBits": 2,
+        "cidrPrefix": 30,
+        "subnetSize": 4,
+        "usableHosts": 2
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 2,
+        "hostBits": 2,
+        "cidrPrefix": 30,
+        "subnetSize": 4,
+        "usableHosts": 2
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 2,
+        "hostBits": 2,
+        "cidrPrefix": 30,
+        "subnetSize": 4,
+        "usableHosts": 2
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 2,
+        "hostBits": 2,
+        "cidrPrefix": 30,
+        "subnetSize": 4,
+        "usableHosts": 2
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 3,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 4,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 2,
+        "hostBits": 2,
+        "cidrPrefix": 30,
+        "subnetSize": 4,
+        "usableHosts": 2
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 3,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 3,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 4,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 6,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 2,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 8,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 3,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 4,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 5,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 6,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 9,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 3,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 12,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 5,
+        "hostBits": 3,
+        "cidrPrefix": 29,
+        "subnetSize": 8,
+        "usableHosts": 6
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 7,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 8,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 10,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 15,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 20,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 10,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 13,
+        "hostBits": 4,
+        "cidrPrefix": 28,
+        "subnetSize": 16,
+        "usableHosts": 14
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 15,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 20,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 30,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 10,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 40,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 25,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 32,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 38,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 50,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 75,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 25,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 100,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 30,
+        "hostBits": 5,
+        "cidrPrefix": 27,
+        "subnetSize": 32,
+        "usableHosts": 30
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 38,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 45,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 60,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 90,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 30,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 120,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 50,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 63,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 75,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 100,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 150,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 50,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 200,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 62,
+        "hostBits": 6,
+        "cidrPrefix": 26,
+        "subnetSize": 64,
+        "usableHosts": 62
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 78,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 93,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 124,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 186,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 62,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 248,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 63,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 79,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 95,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 126,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 189,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 63,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 252,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 100,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 125,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 150,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 200,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 300,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 100,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 400,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 126,
+        "hostBits": 7,
+        "cidrPrefix": 25,
+        "subnetSize": 128,
+        "usableHosts": 126
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 158,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 189,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 252,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 378,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 126,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 504,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 127,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 159,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 191,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 254,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 381,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 127,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 508,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 200,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 250,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 300,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 400,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 600,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 200,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 800,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 254,
+        "hostBits": 8,
+        "cidrPrefix": 24,
+        "subnetSize": 256,
+        "usableHosts": 254
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 318,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 381,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 508,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 762,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 254,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 1016,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 255,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 319,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 383,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 510,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 765,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 255,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 1020,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 500,
+        "hostBits": 9,
+        "cidrPrefix": 23,
+        "subnetSize": 512,
+        "usableHosts": 510
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 625,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 750,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 1000,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 1500,
+        "hostBits": 11,
+        "cidrPrefix": 21,
+        "subnetSize": 2048,
+        "usableHosts": 2046
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 500,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 2000,
+        "hostBits": 11,
+        "cidrPrefix": 21,
+        "subnetSize": 2048,
+        "usableHosts": 2046
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 1000,
+        "hostBits": 10,
+        "cidrPrefix": 22,
+        "subnetSize": 1024,
+        "usableHosts": 1022
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 1250,
+        "hostBits": 11,
+        "cidrPrefix": 21,
+        "subnetSize": 2048,
+        "usableHosts": 2046
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 1500,
+        "hostBits": 11,
+        "cidrPrefix": 21,
+        "subnetSize": 2048,
+        "usableHosts": 2046
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 2000,
+        "hostBits": 11,
+        "cidrPrefix": 21,
+        "subnetSize": 2048,
+        "usableHosts": 2046
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 3000,
+        "hostBits": 12,
+        "cidrPrefix": 20,
+        "subnetSize": 4096,
+        "usableHosts": 4094
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 1000,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 4000,
+        "hostBits": 12,
+        "cidrPrefix": 20,
+        "subnetSize": 4096,
+        "usableHosts": 4094
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 5000,
+        "hostBits": 13,
+        "cidrPrefix": 19,
+        "subnetSize": 8192,
+        "usableHosts": 8190
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 6250,
+        "hostBits": 13,
+        "cidrPrefix": 19,
+        "subnetSize": 8192,
+        "usableHosts": 8190
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 7500,
+        "hostBits": 13,
+        "cidrPrefix": 19,
+        "subnetSize": 8192,
+        "usableHosts": 8190
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 10000,
+        "hostBits": 14,
+        "cidrPrefix": 18,
+        "subnetSize": 16384,
+        "usableHosts": 16382
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 15000,
+        "hostBits": 14,
+        "cidrPrefix": 18,
+        "subnetSize": 16384,
+        "usableHosts": 16382
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 5000,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 20000,
+        "hostBits": 15,
+        "cidrPrefix": 17,
+        "subnetSize": 32768,
+        "usableHosts": 32766
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 0
+      },
+      "expected": {
+        "plannedDevices": 65534,
+        "hostBits": 16,
+        "cidrPrefix": 16,
+        "subnetSize": 65536,
+        "usableHosts": 65534
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 25
+      },
+      "expected": {
+        "plannedDevices": 81918,
+        "hostBits": 17,
+        "cidrPrefix": 15,
+        "subnetSize": 131072,
+        "usableHosts": 131070
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 50
+      },
+      "expected": {
+        "plannedDevices": 98301,
+        "hostBits": 17,
+        "cidrPrefix": 15,
+        "subnetSize": 131072,
+        "usableHosts": 131070
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 100
+      },
+      "expected": {
+        "plannedDevices": 131068,
+        "hostBits": 17,
+        "cidrPrefix": 15,
+        "subnetSize": 131072,
+        "usableHosts": 131070
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 200
+      },
+      "expected": {
+        "plannedDevices": 196602,
+        "hostBits": 18,
+        "cidrPrefix": 14,
+        "subnetSize": 262144,
+        "usableHosts": 262142
+      }
+    },
+    {
+      "input": {
+        "expectedDevices": 65534,
+        "growthPercentage": 300
+      },
+      "expected": {
+        "plannedDevices": 262136,
+        "hostBits": 18,
+        "cidrPrefix": 14,
+        "subnetSize": 262144,
+        "usableHosts": 262142
+      }
+    }
+  ]
+}

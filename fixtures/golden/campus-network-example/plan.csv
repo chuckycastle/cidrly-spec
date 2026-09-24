@@ -1,0 +1,22 @@
+# Plan Metadata
+# name: Campus Network Example
+# baseIp: 10.100.0.0
+# growthPercentage: 100
+# createdAt: <timestamp>
+# updatedAt: <timestamp>
+
+# Subnet Allocation
+name,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address
+Student WiFi,30,250,,10.100.0.0,23,510,500,512,250,false,
+Engineering Building,10,100,,10.100.2.0,24,254,200,256,100,false,
+Science Lab,20,75,,10.100.3.0,24,254,150,256,75,false,
+Guest WiFi,50,50,,10.100.4.0,25,126,100,128,50,false,
+Administration,40,30,,10.100.4.128,26,62,60,64,30,false,
+
+# Supernet Summary
+# supernet.networkAddress: 10.100.0.0/21
+# supernet.cidrPrefix: 21
+# supernet.totalSize: 2048
+# supernet.usedSize: 1216
+# supernet.utilization: 59.38
+# supernet.rangeEfficiency: 100.00

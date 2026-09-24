@@ -1,0 +1,1733 @@
+{
+  "description": "Import parsers applied to the golden exports of the example plans. expectedDevices is the parser estimate, not the original count.",
+  "cases": [
+    {
+      "name": "branch-office-example via cisco-ios",
+      "input": {
+        "format": "cisco-ios",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Branch Office Example\n! Generated: <timestamp>\n! Base IP: 192.168.10.0\n! Supernet: 192.168.10.0/24\n!\n! VLAN Definitions\nvlan 10\n name Office_Workstations\n!\nvlan 20\n name VoIP_Phones\n!\nvlan 30\n name Guest_WiFi\n!\nvlan 40\n name Printers\n!\nvlan 50\n name Servers\n!\n! SVI Configurations\ninterface Vlan10\n description Office Workstations - 25 devices\n ip address 192.168.10.1 255.255.255.192\n no shutdown\n!\ninterface Vlan20\n description VoIP Phones - 15 devices\n ip address 192.168.10.65 255.255.255.224\n no shutdown\n!\ninterface Vlan30\n description Guest WiFi - 10 devices\n ip address 192.168.10.97 255.255.255.224\n no shutdown\n!\ninterface Vlan40\n description Printers - 5 devices\n ip address 192.168.10.129 255.255.255.240\n no shutdown\n!\ninterface Vlan50\n description Servers - 3 devices\n ip address 192.168.10.145 255.255.255.248\n no shutdown\n!\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via cisco-nxos",
+      "input": {
+        "format": "cisco-nxos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Branch Office Example\n! Generated: <timestamp>\n! Base IP: 192.168.10.0\n! Supernet: 192.168.10.0/24\n!\nfeature interface-vlan\n!\nvlan 10\n  name Office_Workstations\nvlan 20\n  name VoIP_Phones\nvlan 30\n  name Guest_WiFi\nvlan 40\n  name Printers\nvlan 50\n  name Servers\n!\ninterface Vlan10\n  description Office Workstations - 25 devices\n  ip address 192.168.10.1/26\n  no shutdown\ninterface Vlan20\n  description VoIP Phones - 15 devices\n  ip address 192.168.10.65/27\n  no shutdown\ninterface Vlan30\n  description Guest WiFi - 10 devices\n  ip address 192.168.10.97/27\n  no shutdown\ninterface Vlan40\n  description Printers - 5 devices\n  ip address 192.168.10.129/28\n  no shutdown\ninterface Vlan50\n  description Servers - 3 devices\n  ip address 192.168.10.145/29\n  no shutdown\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via arista-eos",
+      "input": {
+        "format": "arista-eos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Branch Office Example\n! Generated: <timestamp>\n! Base IP: 192.168.10.0\n! Supernet: 192.168.10.0/24\n!\nvlan 10\n   name Office_Workstations\n!\nvlan 20\n   name VoIP_Phones\n!\nvlan 30\n   name Guest_WiFi\n!\nvlan 40\n   name Printers\n!\nvlan 50\n   name Servers\n!\ninterface Vlan10\n   description Office Workstations - 25 devices\n   ip address 192.168.10.1/26\n   no shutdown\n!\ninterface Vlan20\n   description VoIP Phones - 15 devices\n   ip address 192.168.10.65/27\n   no shutdown\n!\ninterface Vlan30\n   description Guest WiFi - 10 devices\n   ip address 192.168.10.97/27\n   no shutdown\n!\ninterface Vlan40\n   description Printers - 5 devices\n   ip address 192.168.10.129/28\n   no shutdown\n!\ninterface Vlan50\n   description Servers - 3 devices\n   ip address 192.168.10.145/29\n   no shutdown\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via juniper-junos",
+      "input": {
+        "format": "juniper-junos",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Branch Office Example\n# Generated: <timestamp>\n# Base IP: 192.168.10.0\n# Supernet: 192.168.10.0/24\n#\n\nvlans {\n    Office_Workstations {\n        vlan-id 10;\n        l3-interface irb.10;\n    }\n    VoIP_Phones {\n        vlan-id 20;\n        l3-interface irb.20;\n    }\n    Guest_WiFi {\n        vlan-id 30;\n        l3-interface irb.30;\n    }\n    Printers {\n        vlan-id 40;\n        l3-interface irb.40;\n    }\n    Servers {\n        vlan-id 50;\n        l3-interface irb.50;\n    }\n}\n\ninterfaces {\n    irb {\n        unit 10 {\n            description \"Office Workstations - 25 devices\";\n            family inet {\n                address 192.168.10.1/26;\n            }\n        }\n        unit 20 {\n            description \"VoIP Phones - 15 devices\";\n            family inet {\n                address 192.168.10.65/27;\n            }\n        }\n        unit 30 {\n            description \"Guest WiFi - 10 devices\";\n            family inet {\n                address 192.168.10.97/27;\n            }\n        }\n        unit 40 {\n            description \"Printers - 5 devices\";\n            family inet {\n                address 192.168.10.129/28;\n            }\n        }\n        unit 50 {\n            description \"Servers - 3 devices\";\n            family inet {\n                address 192.168.10.145/29;\n            }\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via fortinet",
+      "input": {
+        "format": "fortinet",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Branch Office Example\n# Generated: <timestamp>\n# Base IP: 192.168.10.0\n# Supernet: 192.168.10.0/24\n#\n\nconfig system interface\n    edit \"vlan10\"\n        set vdom \"root\"\n        set ip 192.168.10.1 255.255.255.192\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 10\n        set interface \"internal\"\n        set alias \"Office_Workstations\"\n        set description \"Office Workstations - 25 devices\"\n    next\n    edit \"vlan20\"\n        set vdom \"root\"\n        set ip 192.168.10.65 255.255.255.224\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 20\n        set interface \"internal\"\n        set alias \"VoIP_Phones\"\n        set description \"VoIP Phones - 15 devices\"\n    next\n    edit \"vlan30\"\n        set vdom \"root\"\n        set ip 192.168.10.97 255.255.255.224\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 30\n        set interface \"internal\"\n        set alias \"Guest_WiFi\"\n        set description \"Guest WiFi - 10 devices\"\n    next\n    edit \"vlan40\"\n        set vdom \"root\"\n        set ip 192.168.10.129 255.255.255.240\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 40\n        set interface \"internal\"\n        set alias \"Printers\"\n        set description \"Printers - 5 devices\"\n    next\n    edit \"vlan50\"\n        set vdom \"root\"\n        set ip 192.168.10.145 255.255.255.248\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 50\n        set interface \"internal\"\n        set alias \"Servers\"\n        set description \"Servers - 3 devices\"\n    next\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "VLAN 10",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VLAN 20",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "VLAN 30",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "VLAN 40",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "VLAN 50",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via netgear",
+      "input": {
+        "format": "netgear",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Branch Office Example\n! Generated: <timestamp>\n! Base IP: 192.168.10.0\n! Supernet: 192.168.10.0/24\n!\n\nvlan database\nvlan 10 name \"Office_Workstations\"\nvlan 20 name \"VoIP_Phones\"\nvlan 30 name \"Guest_WiFi\"\nvlan 40 name \"Printers\"\nvlan 50 name \"Servers\"\nexit\n!\ninterface vlan 10\nip address 192.168.10.1 255.255.255.192\ndescription \"Office Workstations - 25 devices\"\nexit\n!\ninterface vlan 20\nip address 192.168.10.65 255.255.255.224\ndescription \"VoIP Phones - 15 devices\"\nexit\n!\ninterface vlan 30\nip address 192.168.10.97 255.255.255.224\ndescription \"Guest WiFi - 10 devices\"\nexit\n!\ninterface vlan 40\nip address 192.168.10.129 255.255.255.240\ndescription \"Printers - 5 devices\"\nexit\n!\ninterface vlan 50\nip address 192.168.10.145 255.255.255.248\ndescription \"Servers - 3 devices\"\nexit\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via ubiquiti",
+      "input": {
+        "format": "ubiquiti",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Branch Office Example\n# Generated: <timestamp>\n# Base IP: 192.168.10.0\n# Supernet: 192.168.10.0/24\n#\n\ninterfaces {\n    ethernet eth0 {\n        vif 10 {\n            address 192.168.10.1/26\n            description \"Office Workstations - 25 devices\"\n        }\n        vif 20 {\n            address 192.168.10.65/27\n            description \"VoIP Phones - 15 devices\"\n        }\n        vif 30 {\n            address 192.168.10.97/27\n            description \"Guest WiFi - 10 devices\"\n        }\n        vif 40 {\n            address 192.168.10.129/28\n            description \"Printers - 5 devices\"\n        }\n        vif 50 {\n            address 192.168.10.145/29\n            description \"Servers - 3 devices\"\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations - 25 devices",
+            "vlanId": 10,
+            "expectedDevices": 31,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": "Office Workstations - 25 devices",
+            "gatewayIp": "192.168.10.1"
+          },
+          {
+            "name": "VoIP Phones - 15 devices",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": "VoIP Phones - 15 devices",
+            "gatewayIp": "192.168.10.65"
+          },
+          {
+            "name": "Guest WiFi - 10 devices",
+            "vlanId": 30,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": "Guest WiFi - 10 devices",
+            "gatewayIp": "192.168.10.97"
+          },
+          {
+            "name": "Printers - 5 devices",
+            "vlanId": 40,
+            "expectedDevices": 7,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": "Printers - 5 devices",
+            "gatewayIp": "192.168.10.129"
+          },
+          {
+            "name": "Servers - 3 devices",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": "Servers - 3 devices",
+            "gatewayIp": "192.168.10.145"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via csv",
+      "input": {
+        "format": "csv",
+        "content": "# Plan Metadata\n# name: Branch Office Example\n# baseIp: 192.168.10.0\n# growthPercentage: 100\n# createdAt: <timestamp>\n# updatedAt: <timestamp>\n\n# Subnet Allocation\nname,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address\nOffice Workstations,10,25,,192.168.10.0,26,62,50,64,25,false,\nVoIP Phones,20,15,,192.168.10.64,27,30,30,32,15,false,\nGuest WiFi,30,10,,192.168.10.96,27,30,20,32,10,false,\nPrinters,40,5,,192.168.10.128,28,14,10,16,5,false,\nServers,50,3,,192.168.10.144,29,6,6,8,3,false,\n\n# Supernet Summary\n# supernet.networkAddress: 192.168.10.0/24\n# supernet.cidrPrefix: 24\n# supernet.totalSize: 256\n# supernet.usedSize: 152\n# supernet.utilization: 59.38\n# supernet.rangeEfficiency: 100.00"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 25,
+            "networkAddress": "192.168.10.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 10,
+            "networkAddress": "192.168.10.96",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 5,
+            "networkAddress": "192.168.10.128",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "branch-office-example via yaml",
+      "input": {
+        "format": "yaml",
+        "content": "# cidrly Network Plan\n# Generated: <timestamp>\n# https://github.com/chuckycastle/cidrly\n\nname: \"Branch Office Example\"\nbaseIp: \"192.168.10.0\"\ngrowthPercentage: 100\nmetadata:\n  createdAt: \"<timestamp>\"\n  updatedAt: \"<timestamp>\"\n\n# Subnet Allocation\nsubnets:\n  - id: \"subnet-1\"\n    name: \"Office Workstations\"\n    vlanId: 10\n    devices: 25\n    networkAddress: \"192.168.10.0/26\"\n    cidrPrefix: 26\n    maxHosts: 62\n    planned: 50\n    requiredHosts: 25\n    subnetSize: 64\n  - id: \"subnet-2\"\n    name: \"VoIP Phones\"\n    vlanId: 20\n    devices: 15\n    networkAddress: \"192.168.10.64/27\"\n    cidrPrefix: 27\n    maxHosts: 30\n    planned: 30\n    requiredHosts: 15\n    subnetSize: 32\n  - id: \"subnet-3\"\n    name: \"Guest WiFi\"\n    vlanId: 30\n    devices: 10\n    networkAddress: \"192.168.10.96/27\"\n    cidrPrefix: 27\n    maxHosts: 30\n    planned: 20\n    requiredHosts: 10\n    subnetSize: 32\n  - id: \"subnet-4\"\n    name: \"Printers\"\n    vlanId: 40\n    devices: 5\n    networkAddress: \"192.168.10.128/28\"\n    cidrPrefix: 28\n    maxHosts: 14\n    planned: 10\n    requiredHosts: 5\n    subnetSize: 16\n  - id: \"subnet-5\"\n    name: \"Servers\"\n    vlanId: 50\n    devices: 3\n    networkAddress: \"192.168.10.144/29\"\n    cidrPrefix: 29\n    maxHosts: 6\n    planned: 6\n    requiredHosts: 3\n    subnetSize: 8\n\n# Supernet Summary\nsupernet:\n  networkAddress: \"192.168.10.0/24\"\n  cidrPrefix: 24\n  totalSize: 256\n  usedSize: 152\n  utilization: 59.375\n  rangeEfficiency: 100\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": "192.168.10.0",
+        "detectedPlanName": "Branch Office Example",
+        "subnets": [
+          {
+            "name": "Office Workstations",
+            "vlanId": 10,
+            "expectedDevices": 25,
+            "networkAddress": "192.168.10.0/26",
+            "cidrPrefix": 26,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "VoIP Phones",
+            "vlanId": 20,
+            "expectedDevices": 15,
+            "networkAddress": "192.168.10.64/27",
+            "cidrPrefix": 27,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 30,
+            "expectedDevices": 10,
+            "networkAddress": "192.168.10.96/27",
+            "cidrPrefix": 27,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Printers",
+            "vlanId": 40,
+            "expectedDevices": 5,
+            "networkAddress": "192.168.10.128/28",
+            "cidrPrefix": 28,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Servers",
+            "vlanId": 50,
+            "expectedDevices": 3,
+            "networkAddress": "192.168.10.144/29",
+            "cidrPrefix": 29,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via cisco-ios",
+      "input": {
+        "format": "cisco-ios",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Campus Network Example\n! Generated: <timestamp>\n! Base IP: 10.100.0.0\n! Supernet: 10.100.0.0/21\n!\n! VLAN Definitions\nvlan 30\n name Student_WiFi\n!\nvlan 10\n name Engineering_Building\n!\nvlan 20\n name Science_Lab\n!\nvlan 50\n name Guest_WiFi\n!\nvlan 40\n name Administration\n!\n! SVI Configurations\ninterface Vlan30\n description Student WiFi - 250 devices\n ip address 10.100.0.1 255.255.254.0\n no shutdown\n!\ninterface Vlan10\n description Engineering Building - 100 devices\n ip address 10.100.2.1 255.255.255.0\n no shutdown\n!\ninterface Vlan20\n description Science Lab - 75 devices\n ip address 10.100.3.1 255.255.255.0\n no shutdown\n!\ninterface Vlan50\n description Guest WiFi - 50 devices\n ip address 10.100.4.1 255.255.255.128\n no shutdown\n!\ninterface Vlan40\n description Administration - 30 devices\n ip address 10.100.4.129 255.255.255.192\n no shutdown\n!\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via cisco-nxos",
+      "input": {
+        "format": "cisco-nxos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Campus Network Example\n! Generated: <timestamp>\n! Base IP: 10.100.0.0\n! Supernet: 10.100.0.0/21\n!\nfeature interface-vlan\n!\nvlan 30\n  name Student_WiFi\nvlan 10\n  name Engineering_Building\nvlan 20\n  name Science_Lab\nvlan 50\n  name Guest_WiFi\nvlan 40\n  name Administration\n!\ninterface Vlan30\n  description Student WiFi - 250 devices\n  ip address 10.100.0.1/23\n  no shutdown\ninterface Vlan10\n  description Engineering Building - 100 devices\n  ip address 10.100.2.1/24\n  no shutdown\ninterface Vlan20\n  description Science Lab - 75 devices\n  ip address 10.100.3.1/24\n  no shutdown\ninterface Vlan50\n  description Guest WiFi - 50 devices\n  ip address 10.100.4.1/25\n  no shutdown\ninterface Vlan40\n  description Administration - 30 devices\n  ip address 10.100.4.129/26\n  no shutdown\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via arista-eos",
+      "input": {
+        "format": "arista-eos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Campus Network Example\n! Generated: <timestamp>\n! Base IP: 10.100.0.0\n! Supernet: 10.100.0.0/21\n!\nvlan 30\n   name Student_WiFi\n!\nvlan 10\n   name Engineering_Building\n!\nvlan 20\n   name Science_Lab\n!\nvlan 50\n   name Guest_WiFi\n!\nvlan 40\n   name Administration\n!\ninterface Vlan30\n   description Student WiFi - 250 devices\n   ip address 10.100.0.1/23\n   no shutdown\n!\ninterface Vlan10\n   description Engineering Building - 100 devices\n   ip address 10.100.2.1/24\n   no shutdown\n!\ninterface Vlan20\n   description Science Lab - 75 devices\n   ip address 10.100.3.1/24\n   no shutdown\n!\ninterface Vlan50\n   description Guest WiFi - 50 devices\n   ip address 10.100.4.1/25\n   no shutdown\n!\ninterface Vlan40\n   description Administration - 30 devices\n   ip address 10.100.4.129/26\n   no shutdown\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via juniper-junos",
+      "input": {
+        "format": "juniper-junos",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Campus Network Example\n# Generated: <timestamp>\n# Base IP: 10.100.0.0\n# Supernet: 10.100.0.0/21\n#\n\nvlans {\n    Student_WiFi {\n        vlan-id 30;\n        l3-interface irb.30;\n    }\n    Engineering_Building {\n        vlan-id 10;\n        l3-interface irb.10;\n    }\n    Science_Lab {\n        vlan-id 20;\n        l3-interface irb.20;\n    }\n    Guest_WiFi {\n        vlan-id 50;\n        l3-interface irb.50;\n    }\n    Administration {\n        vlan-id 40;\n        l3-interface irb.40;\n    }\n}\n\ninterfaces {\n    irb {\n        unit 30 {\n            description \"Student WiFi - 250 devices\";\n            family inet {\n                address 10.100.0.1/23;\n            }\n        }\n        unit 10 {\n            description \"Engineering Building - 100 devices\";\n            family inet {\n                address 10.100.2.1/24;\n            }\n        }\n        unit 20 {\n            description \"Science Lab - 75 devices\";\n            family inet {\n                address 10.100.3.1/24;\n            }\n        }\n        unit 50 {\n            description \"Guest WiFi - 50 devices\";\n            family inet {\n                address 10.100.4.1/25;\n            }\n        }\n        unit 40 {\n            description \"Administration - 30 devices\";\n            family inet {\n                address 10.100.4.129/26;\n            }\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via fortinet",
+      "input": {
+        "format": "fortinet",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Campus Network Example\n# Generated: <timestamp>\n# Base IP: 10.100.0.0\n# Supernet: 10.100.0.0/21\n#\n\nconfig system interface\n    edit \"vlan30\"\n        set vdom \"root\"\n        set ip 10.100.0.1 255.255.254.0\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 30\n        set interface \"internal\"\n        set alias \"Student_WiFi\"\n        set description \"Student WiFi - 250 devices\"\n    next\n    edit \"vlan10\"\n        set vdom \"root\"\n        set ip 10.100.2.1 255.255.255.0\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 10\n        set interface \"internal\"\n        set alias \"Engineering_Building\"\n        set description \"Engineering Building - 100 devices\"\n    next\n    edit \"vlan20\"\n        set vdom \"root\"\n        set ip 10.100.3.1 255.255.255.0\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 20\n        set interface \"internal\"\n        set alias \"Science_Lab\"\n        set description \"Science Lab - 75 devices\"\n    next\n    edit \"vlan50\"\n        set vdom \"root\"\n        set ip 10.100.4.1 255.255.255.128\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 50\n        set interface \"internal\"\n        set alias \"Guest_WiFi\"\n        set description \"Guest WiFi - 50 devices\"\n    next\n    edit \"vlan40\"\n        set vdom \"root\"\n        set ip 10.100.4.129 255.255.255.192\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 40\n        set interface \"internal\"\n        set alias \"Administration\"\n        set description \"Administration - 30 devices\"\n    next\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "VLAN 30",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "VLAN 10",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "VLAN 20",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "VLAN 50",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "VLAN 40",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via netgear",
+      "input": {
+        "format": "netgear",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Campus Network Example\n! Generated: <timestamp>\n! Base IP: 10.100.0.0\n! Supernet: 10.100.0.0/21\n!\n\nvlan database\nvlan 30 name \"Student_WiFi\"\nvlan 10 name \"Engineering_Building\"\nvlan 20 name \"Science_Lab\"\nvlan 50 name \"Guest_WiFi\"\nvlan 40 name \"Administration\"\nexit\n!\ninterface vlan 30\nip address 10.100.0.1 255.255.254.0\ndescription \"Student WiFi - 250 devices\"\nexit\n!\ninterface vlan 10\nip address 10.100.2.1 255.255.255.0\ndescription \"Engineering Building - 100 devices\"\nexit\n!\ninterface vlan 20\nip address 10.100.3.1 255.255.255.0\ndescription \"Science Lab - 75 devices\"\nexit\n!\ninterface vlan 50\nip address 10.100.4.1 255.255.255.128\ndescription \"Guest WiFi - 50 devices\"\nexit\n!\ninterface vlan 40\nip address 10.100.4.129 255.255.255.192\ndescription \"Administration - 30 devices\"\nexit\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via ubiquiti",
+      "input": {
+        "format": "ubiquiti",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Campus Network Example\n# Generated: <timestamp>\n# Base IP: 10.100.0.0\n# Supernet: 10.100.0.0/21\n#\n\ninterfaces {\n    ethernet eth0 {\n        vif 30 {\n            address 10.100.0.1/23\n            description \"Student WiFi - 250 devices\"\n        }\n        vif 10 {\n            address 10.100.2.1/24\n            description \"Engineering Building - 100 devices\"\n        }\n        vif 20 {\n            address 10.100.3.1/24\n            description \"Science Lab - 75 devices\"\n        }\n        vif 50 {\n            address 10.100.4.1/25\n            description \"Guest WiFi - 50 devices\"\n        }\n        vif 40 {\n            address 10.100.4.129/26\n            description \"Administration - 30 devices\"\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi - 250 devices",
+            "vlanId": 30,
+            "expectedDevices": 255,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": "Student WiFi - 250 devices",
+            "gatewayIp": "10.100.0.1"
+          },
+          {
+            "name": "Engineering Building - 100 devices",
+            "vlanId": 10,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": "Engineering Building - 100 devices",
+            "gatewayIp": "10.100.2.1"
+          },
+          {
+            "name": "Science Lab - 75 devices",
+            "vlanId": 20,
+            "expectedDevices": 127,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": "Science Lab - 75 devices",
+            "gatewayIp": "10.100.3.1"
+          },
+          {
+            "name": "Guest WiFi - 50 devices",
+            "vlanId": 50,
+            "expectedDevices": 63,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": "Guest WiFi - 50 devices",
+            "gatewayIp": "10.100.4.1"
+          },
+          {
+            "name": "Administration - 30 devices",
+            "vlanId": 40,
+            "expectedDevices": 31,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": "Administration - 30 devices",
+            "gatewayIp": "10.100.4.129"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via csv",
+      "input": {
+        "format": "csv",
+        "content": "# Plan Metadata\n# name: Campus Network Example\n# baseIp: 10.100.0.0\n# growthPercentage: 100\n# createdAt: <timestamp>\n# updatedAt: <timestamp>\n\n# Subnet Allocation\nname,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address\nStudent WiFi,30,250,,10.100.0.0,23,510,500,512,250,false,\nEngineering Building,10,100,,10.100.2.0,24,254,200,256,100,false,\nScience Lab,20,75,,10.100.3.0,24,254,150,256,75,false,\nGuest WiFi,50,50,,10.100.4.0,25,126,100,128,50,false,\nAdministration,40,30,,10.100.4.128,26,62,60,64,30,false,\n\n# Supernet Summary\n# supernet.networkAddress: 10.100.0.0/21\n# supernet.cidrPrefix: 21\n# supernet.totalSize: 2048\n# supernet.usedSize: 1216\n# supernet.utilization: 59.38\n# supernet.rangeEfficiency: 100.00"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 250,
+            "networkAddress": "10.100.0.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 100,
+            "networkAddress": "10.100.2.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 75,
+            "networkAddress": "10.100.3.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 50,
+            "networkAddress": "10.100.4.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 30,
+            "networkAddress": "10.100.4.128",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "campus-network-example via yaml",
+      "input": {
+        "format": "yaml",
+        "content": "# cidrly Network Plan\n# Generated: <timestamp>\n# https://github.com/chuckycastle/cidrly\n\nname: \"Campus Network Example\"\nbaseIp: \"10.100.0.0\"\ngrowthPercentage: 100\nmetadata:\n  createdAt: \"<timestamp>\"\n  updatedAt: \"<timestamp>\"\n\n# Subnet Allocation\nsubnets:\n  - id: \"subnet-3\"\n    name: \"Student WiFi\"\n    vlanId: 30\n    devices: 250\n    networkAddress: \"10.100.0.0/23\"\n    cidrPrefix: 23\n    maxHosts: 510\n    planned: 500\n    requiredHosts: 250\n    subnetSize: 512\n  - id: \"subnet-1\"\n    name: \"Engineering Building\"\n    vlanId: 10\n    devices: 100\n    networkAddress: \"10.100.2.0/24\"\n    cidrPrefix: 24\n    maxHosts: 254\n    planned: 200\n    requiredHosts: 100\n    subnetSize: 256\n  - id: \"subnet-2\"\n    name: \"Science Lab\"\n    vlanId: 20\n    devices: 75\n    networkAddress: \"10.100.3.0/24\"\n    cidrPrefix: 24\n    maxHosts: 254\n    planned: 150\n    requiredHosts: 75\n    subnetSize: 256\n  - id: \"subnet-5\"\n    name: \"Guest WiFi\"\n    vlanId: 50\n    devices: 50\n    networkAddress: \"10.100.4.0/25\"\n    cidrPrefix: 25\n    maxHosts: 126\n    planned: 100\n    requiredHosts: 50\n    subnetSize: 128\n  - id: \"subnet-4\"\n    name: \"Administration\"\n    vlanId: 40\n    devices: 30\n    networkAddress: \"10.100.4.128/26\"\n    cidrPrefix: 26\n    maxHosts: 62\n    planned: 60\n    requiredHosts: 30\n    subnetSize: 64\n\n# Supernet Summary\nsupernet:\n  networkAddress: \"10.100.0.0/21\"\n  cidrPrefix: 21\n  totalSize: 2048\n  usedSize: 1216\n  utilization: 59.375\n  rangeEfficiency: 100\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": "10.100.0.0",
+        "detectedPlanName": "Campus Network Example",
+        "subnets": [
+          {
+            "name": "Student WiFi",
+            "vlanId": 30,
+            "expectedDevices": 250,
+            "networkAddress": "10.100.0.0/23",
+            "cidrPrefix": 23,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Engineering Building",
+            "vlanId": 10,
+            "expectedDevices": 100,
+            "networkAddress": "10.100.2.0/24",
+            "cidrPrefix": 24,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Science Lab",
+            "vlanId": 20,
+            "expectedDevices": 75,
+            "networkAddress": "10.100.3.0/24",
+            "cidrPrefix": 24,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Guest WiFi",
+            "vlanId": 50,
+            "expectedDevices": 50,
+            "networkAddress": "10.100.4.0/25",
+            "cidrPrefix": 25,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Administration",
+            "vlanId": 40,
+            "expectedDevices": 30,
+            "networkAddress": "10.100.4.128/26",
+            "cidrPrefix": 26,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via cisco-ios",
+      "input": {
+        "format": "cisco-ios",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Data Center Example\n! Generated: <timestamp>\n! Base IP: 172.16.0.0\n! Supernet: 172.16.0.0/24\n!\n! VLAN Definitions\nvlan 100\n name Web_Tier\n!\nvlan 110\n name Application_Tier\n!\nvlan 120\n name Database_Tier\n!\nvlan 130\n name Storage_Network\n!\nvlan 140\n name Management\n!\nvlan 150\n name Backup_Network\n!\n! SVI Configurations\ninterface Vlan100\n description Web Tier - 20 devices\n ip address 172.16.0.1 255.255.255.192\n no shutdown\n!\ninterface Vlan110\n description Application Tier - 30 devices\n ip address 172.16.0.65 255.255.255.192\n no shutdown\n!\ninterface Vlan120\n description Database Tier - 10 devices\n ip address 172.16.0.129 255.255.255.224\n no shutdown\n!\ninterface Vlan130\n description Storage Network - 15 devices\n ip address 172.16.0.161 255.255.255.224\n no shutdown\n!\ninterface Vlan140\n description Management - 8 devices\n ip address 172.16.0.193 255.255.255.224\n no shutdown\n!\ninterface Vlan150\n description Backup Network - 5 devices\n ip address 172.16.0.225 255.255.255.240\n no shutdown\n!\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via cisco-nxos",
+      "input": {
+        "format": "cisco-nxos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Data Center Example\n! Generated: <timestamp>\n! Base IP: 172.16.0.0\n! Supernet: 172.16.0.0/24\n!\nfeature interface-vlan\n!\nvlan 100\n  name Web_Tier\nvlan 110\n  name Application_Tier\nvlan 120\n  name Database_Tier\nvlan 130\n  name Storage_Network\nvlan 140\n  name Management\nvlan 150\n  name Backup_Network\n!\ninterface Vlan100\n  description Web Tier - 20 devices\n  ip address 172.16.0.1/26\n  no shutdown\ninterface Vlan110\n  description Application Tier - 30 devices\n  ip address 172.16.0.65/26\n  no shutdown\ninterface Vlan120\n  description Database Tier - 10 devices\n  ip address 172.16.0.129/27\n  no shutdown\ninterface Vlan130\n  description Storage Network - 15 devices\n  ip address 172.16.0.161/27\n  no shutdown\ninterface Vlan140\n  description Management - 8 devices\n  ip address 172.16.0.193/27\n  no shutdown\ninterface Vlan150\n  description Backup Network - 5 devices\n  ip address 172.16.0.225/28\n  no shutdown\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via arista-eos",
+      "input": {
+        "format": "arista-eos",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Data Center Example\n! Generated: <timestamp>\n! Base IP: 172.16.0.0\n! Supernet: 172.16.0.0/24\n!\nvlan 100\n   name Web_Tier\n!\nvlan 110\n   name Application_Tier\n!\nvlan 120\n   name Database_Tier\n!\nvlan 130\n   name Storage_Network\n!\nvlan 140\n   name Management\n!\nvlan 150\n   name Backup_Network\n!\ninterface Vlan100\n   description Web Tier - 20 devices\n   ip address 172.16.0.1/26\n   no shutdown\n!\ninterface Vlan110\n   description Application Tier - 30 devices\n   ip address 172.16.0.65/26\n   no shutdown\n!\ninterface Vlan120\n   description Database Tier - 10 devices\n   ip address 172.16.0.129/27\n   no shutdown\n!\ninterface Vlan130\n   description Storage Network - 15 devices\n   ip address 172.16.0.161/27\n   no shutdown\n!\ninterface Vlan140\n   description Management - 8 devices\n   ip address 172.16.0.193/27\n   no shutdown\n!\ninterface Vlan150\n   description Backup Network - 5 devices\n   ip address 172.16.0.225/28\n   no shutdown\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via juniper-junos",
+      "input": {
+        "format": "juniper-junos",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Data Center Example\n# Generated: <timestamp>\n# Base IP: 172.16.0.0\n# Supernet: 172.16.0.0/24\n#\n\nvlans {\n    Web_Tier {\n        vlan-id 100;\n        l3-interface irb.100;\n    }\n    Application_Tier {\n        vlan-id 110;\n        l3-interface irb.110;\n    }\n    Database_Tier {\n        vlan-id 120;\n        l3-interface irb.120;\n    }\n    Storage_Network {\n        vlan-id 130;\n        l3-interface irb.130;\n    }\n    Management {\n        vlan-id 140;\n        l3-interface irb.140;\n    }\n    Backup_Network {\n        vlan-id 150;\n        l3-interface irb.150;\n    }\n}\n\ninterfaces {\n    irb {\n        unit 100 {\n            description \"Web Tier - 20 devices\";\n            family inet {\n                address 172.16.0.1/26;\n            }\n        }\n        unit 110 {\n            description \"Application Tier - 30 devices\";\n            family inet {\n                address 172.16.0.65/26;\n            }\n        }\n        unit 120 {\n            description \"Database Tier - 10 devices\";\n            family inet {\n                address 172.16.0.129/27;\n            }\n        }\n        unit 130 {\n            description \"Storage Network - 15 devices\";\n            family inet {\n                address 172.16.0.161/27;\n            }\n        }\n        unit 140 {\n            description \"Management - 8 devices\";\n            family inet {\n                address 172.16.0.193/27;\n            }\n        }\n        unit 150 {\n            description \"Backup Network - 5 devices\";\n            family inet {\n                address 172.16.0.225/28;\n            }\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via fortinet",
+      "input": {
+        "format": "fortinet",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Data Center Example\n# Generated: <timestamp>\n# Base IP: 172.16.0.0\n# Supernet: 172.16.0.0/24\n#\n\nconfig system interface\n    edit \"vlan100\"\n        set vdom \"root\"\n        set ip 172.16.0.1 255.255.255.192\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 100\n        set interface \"internal\"\n        set alias \"Web_Tier\"\n        set description \"Web Tier - 20 devices\"\n    next\n    edit \"vlan110\"\n        set vdom \"root\"\n        set ip 172.16.0.65 255.255.255.192\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 110\n        set interface \"internal\"\n        set alias \"Application_Tier\"\n        set description \"Application Tier - 30 devices\"\n    next\n    edit \"vlan120\"\n        set vdom \"root\"\n        set ip 172.16.0.129 255.255.255.224\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 120\n        set interface \"internal\"\n        set alias \"Database_Tier\"\n        set description \"Database Tier - 10 devices\"\n    next\n    edit \"vlan130\"\n        set vdom \"root\"\n        set ip 172.16.0.161 255.255.255.224\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 130\n        set interface \"internal\"\n        set alias \"Storage_Network\"\n        set description \"Storage Network - 15 devices\"\n    next\n    edit \"vlan140\"\n        set vdom \"root\"\n        set ip 172.16.0.193 255.255.255.224\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 140\n        set interface \"internal\"\n        set alias \"Management\"\n        set description \"Management - 8 devices\"\n    next\n    edit \"vlan150\"\n        set vdom \"root\"\n        set ip 172.16.0.225 255.255.255.240\n        set allowaccess ping https ssh\n        set type vlan\n        set vlanid 150\n        set interface \"internal\"\n        set alias \"Backup_Network\"\n        set description \"Backup Network - 5 devices\"\n    next\nend\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "VLAN 100",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "VLAN 110",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "VLAN 120",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "VLAN 130",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "VLAN 140",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "VLAN 150",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via netgear",
+      "input": {
+        "format": "netgear",
+        "content": "!\n! cidrly Network Configuration\n! Plan: Data Center Example\n! Generated: <timestamp>\n! Base IP: 172.16.0.0\n! Supernet: 172.16.0.0/24\n!\n\nvlan database\nvlan 100 name \"Web_Tier\"\nvlan 110 name \"Application_Tier\"\nvlan 120 name \"Database_Tier\"\nvlan 130 name \"Storage_Network\"\nvlan 140 name \"Management\"\nvlan 150 name \"Backup_Network\"\nexit\n!\ninterface vlan 100\nip address 172.16.0.1 255.255.255.192\ndescription \"Web Tier - 20 devices\"\nexit\n!\ninterface vlan 110\nip address 172.16.0.65 255.255.255.192\ndescription \"Application Tier - 30 devices\"\nexit\n!\ninterface vlan 120\nip address 172.16.0.129 255.255.255.224\ndescription \"Database Tier - 10 devices\"\nexit\n!\ninterface vlan 130\nip address 172.16.0.161 255.255.255.224\ndescription \"Storage Network - 15 devices\"\nexit\n!\ninterface vlan 140\nip address 172.16.0.193 255.255.255.224\ndescription \"Management - 8 devices\"\nexit\n!\ninterface vlan 150\nip address 172.16.0.225 255.255.255.240\ndescription \"Backup Network - 5 devices\"\nexit\n!\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via ubiquiti",
+      "input": {
+        "format": "ubiquiti",
+        "content": "#\n# cidrly Network Configuration\n# Plan: Data Center Example\n# Generated: <timestamp>\n# Base IP: 172.16.0.0\n# Supernet: 172.16.0.0/24\n#\n\ninterfaces {\n    ethernet eth0 {\n        vif 100 {\n            address 172.16.0.1/26\n            description \"Web Tier - 20 devices\"\n        }\n        vif 110 {\n            address 172.16.0.65/26\n            description \"Application Tier - 30 devices\"\n        }\n        vif 120 {\n            address 172.16.0.129/27\n            description \"Database Tier - 10 devices\"\n        }\n        vif 130 {\n            address 172.16.0.161/27\n            description \"Storage Network - 15 devices\"\n        }\n        vif 140 {\n            address 172.16.0.193/27\n            description \"Management - 8 devices\"\n        }\n        vif 150 {\n            address 172.16.0.225/28\n            description \"Backup Network - 5 devices\"\n        }\n    }\n}\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier - 20 devices",
+            "vlanId": 100,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": "Web Tier - 20 devices",
+            "gatewayIp": "172.16.0.1"
+          },
+          {
+            "name": "Application Tier - 30 devices",
+            "vlanId": 110,
+            "expectedDevices": 31,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": "Application Tier - 30 devices",
+            "gatewayIp": "172.16.0.65"
+          },
+          {
+            "name": "Database Tier - 10 devices",
+            "vlanId": 120,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": "Database Tier - 10 devices",
+            "gatewayIp": "172.16.0.129"
+          },
+          {
+            "name": "Storage Network - 15 devices",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": "Storage Network - 15 devices",
+            "gatewayIp": "172.16.0.161"
+          },
+          {
+            "name": "Management - 8 devices",
+            "vlanId": 140,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": "Management - 8 devices",
+            "gatewayIp": "172.16.0.193"
+          },
+          {
+            "name": "Backup Network - 5 devices",
+            "vlanId": 150,
+            "expectedDevices": 7,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": "Backup Network - 5 devices",
+            "gatewayIp": "172.16.0.225"
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via csv",
+      "input": {
+        "format": "csv",
+        "content": "# Plan Metadata\n# name: Data Center Example\n# baseIp: 172.16.0.0\n# growthPercentage: 100\n# createdAt: <timestamp>\n# updatedAt: <timestamp>\n\n# Subnet Allocation\nname,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address\nWeb Tier,100,20,,172.16.0.0,26,62,40,64,20,false,\nApplication Tier,110,30,,172.16.0.64,26,62,60,64,30,false,\nDatabase Tier,120,10,,172.16.0.128,27,30,20,32,10,false,\nStorage Network,130,15,,172.16.0.160,27,30,30,32,15,false,\nManagement,140,8,,172.16.0.192,27,30,16,32,8,false,\nBackup Network,150,5,,172.16.0.224,28,14,10,16,5,false,\n\n# Supernet Summary\n# supernet.networkAddress: 172.16.0.0/24\n# supernet.cidrPrefix: 24\n# supernet.totalSize: 256\n# supernet.usedSize: 240\n# supernet.utilization: 93.75\n# supernet.rangeEfficiency: 100.00"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": null,
+        "detectedPlanName": null,
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 20,
+            "networkAddress": "172.16.0.0",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 30,
+            "networkAddress": "172.16.0.64",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 10,
+            "networkAddress": "172.16.0.128",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 8,
+            "networkAddress": "172.16.0.192",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 5,
+            "networkAddress": "172.16.0.224",
+            "cidrPrefix": null,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    },
+    {
+      "name": "data-center-example via yaml",
+      "input": {
+        "format": "yaml",
+        "content": "# cidrly Network Plan\n# Generated: <timestamp>\n# https://github.com/chuckycastle/cidrly\n\nname: \"Data Center Example\"\nbaseIp: \"172.16.0.0\"\ngrowthPercentage: 100\nmetadata:\n  createdAt: \"<timestamp>\"\n  updatedAt: \"<timestamp>\"\n\n# Subnet Allocation\nsubnets:\n  - id: \"subnet-1\"\n    name: \"Web Tier\"\n    vlanId: 100\n    devices: 20\n    networkAddress: \"172.16.0.0/26\"\n    cidrPrefix: 26\n    maxHosts: 62\n    planned: 40\n    requiredHosts: 20\n    subnetSize: 64\n  - id: \"subnet-2\"\n    name: \"Application Tier\"\n    vlanId: 110\n    devices: 30\n    networkAddress: \"172.16.0.64/26\"\n    cidrPrefix: 26\n    maxHosts: 62\n    planned: 60\n    requiredHosts: 30\n    subnetSize: 64\n  - id: \"subnet-3\"\n    name: \"Database Tier\"\n    vlanId: 120\n    devices: 10\n    networkAddress: \"172.16.0.128/27\"\n    cidrPrefix: 27\n    maxHosts: 30\n    planned: 20\n    requiredHosts: 10\n    subnetSize: 32\n  - id: \"subnet-4\"\n    name: \"Storage Network\"\n    vlanId: 130\n    devices: 15\n    networkAddress: \"172.16.0.160/27\"\n    cidrPrefix: 27\n    maxHosts: 30\n    planned: 30\n    requiredHosts: 15\n    subnetSize: 32\n  - id: \"subnet-5\"\n    name: \"Management\"\n    vlanId: 140\n    devices: 8\n    networkAddress: \"172.16.0.192/27\"\n    cidrPrefix: 27\n    maxHosts: 30\n    planned: 16\n    requiredHosts: 8\n    subnetSize: 32\n  - id: \"subnet-6\"\n    name: \"Backup Network\"\n    vlanId: 150\n    devices: 5\n    networkAddress: \"172.16.0.224/28\"\n    cidrPrefix: 28\n    maxHosts: 14\n    planned: 10\n    requiredHosts: 5\n    subnetSize: 16\n\n# Supernet Summary\nsupernet:\n  networkAddress: \"172.16.0.0/24\"\n  cidrPrefix: 24\n  totalSize: 256\n  usedSize: 240\n  utilization: 93.75\n  rangeEfficiency: 100\n"
+      },
+      "expected": {
+        "success": true,
+        "detectedBaseIp": "172.16.0.0",
+        "detectedPlanName": "Data Center Example",
+        "subnets": [
+          {
+            "name": "Web Tier",
+            "vlanId": 100,
+            "expectedDevices": 20,
+            "networkAddress": "172.16.0.0/26",
+            "cidrPrefix": 26,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Application Tier",
+            "vlanId": 110,
+            "expectedDevices": 30,
+            "networkAddress": "172.16.0.64/26",
+            "cidrPrefix": 26,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Database Tier",
+            "vlanId": 120,
+            "expectedDevices": 10,
+            "networkAddress": "172.16.0.128/27",
+            "cidrPrefix": 27,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Storage Network",
+            "vlanId": 130,
+            "expectedDevices": 15,
+            "networkAddress": "172.16.0.160/27",
+            "cidrPrefix": 27,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Management",
+            "vlanId": 140,
+            "expectedDevices": 8,
+            "networkAddress": "172.16.0.192/27",
+            "cidrPrefix": 27,
+            "description": null,
+            "gatewayIp": null
+          },
+          {
+            "name": "Backup Network",
+            "vlanId": 150,
+            "expectedDevices": 5,
+            "networkAddress": "172.16.0.224/28",
+            "cidrPrefix": 28,
+            "description": null,
+            "gatewayIp": null
+          }
+        ],
+        "warningCount": 0,
+        "errorCount": 0
+      }
+    }
+  ]
+}

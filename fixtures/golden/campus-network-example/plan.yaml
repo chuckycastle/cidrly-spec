@@ -1,0 +1,72 @@
+# cidrly Network Plan
+# Generated: <timestamp>
+# https://github.com/chuckycastle/cidrly
+
+name: "Campus Network Example"
+baseIp: "10.100.0.0"
+growthPercentage: 100
+metadata:
+  createdAt: "<timestamp>"
+  updatedAt: "<timestamp>"
+
+# Subnet Allocation
+subnets:
+  - id: "subnet-3"
+    name: "Student WiFi"
+    vlanId: 30
+    devices: 250
+    networkAddress: "10.100.0.0/23"
+    cidrPrefix: 23
+    maxHosts: 510
+    planned: 500
+    requiredHosts: 250
+    subnetSize: 512
+  - id: "subnet-1"
+    name: "Engineering Building"
+    vlanId: 10
+    devices: 100
+    networkAddress: "10.100.2.0/24"
+    cidrPrefix: 24
+    maxHosts: 254
+    planned: 200
+    requiredHosts: 100
+    subnetSize: 256
+  - id: "subnet-2"
+    name: "Science Lab"
+    vlanId: 20
+    devices: 75
+    networkAddress: "10.100.3.0/24"
+    cidrPrefix: 24
+    maxHosts: 254
+    planned: 150
+    requiredHosts: 75
+    subnetSize: 256
+  - id: "subnet-5"
+    name: "Guest WiFi"
+    vlanId: 50
+    devices: 50
+    networkAddress: "10.100.4.0/25"
+    cidrPrefix: 25
+    maxHosts: 126
+    planned: 100
+    requiredHosts: 50
+    subnetSize: 128
+  - id: "subnet-4"
+    name: "Administration"
+    vlanId: 40
+    devices: 30
+    networkAddress: "10.100.4.128/26"
+    cidrPrefix: 26
+    maxHosts: 62
+    planned: 60
+    requiredHosts: 30
+    subnetSize: 64
+
+# Supernet Summary
+supernet:
+  networkAddress: "10.100.0.0/21"
+  cidrPrefix: 21
+  totalSize: 2048
+  usedSize: 1216
+  utilization: 59.375
+  rangeEfficiency: 100

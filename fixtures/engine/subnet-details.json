@@ -1,0 +1,135 @@
+{
+  "description": "ipcalc-style details for prefixes the engine can produce (/0 to /30). /31 and /32 semantics are unspecified in this spec version.",
+  "cases": [
+    {
+      "input": {
+        "networkAddress": "10.0.0.0/24"
+      },
+      "expected": {
+        "netmask": "255.255.255.0",
+        "wildcard": "0.0.0.255",
+        "hostMin": "10.0.0.1",
+        "hostMax": "10.0.0.254",
+        "broadcast": "10.0.0.255",
+        "gateway": "10.0.0.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.128/25"
+      },
+      "expected": {
+        "netmask": "255.255.255.128",
+        "wildcard": "0.0.0.127",
+        "hostMin": "10.0.0.129",
+        "hostMax": "10.0.0.254",
+        "broadcast": "10.0.0.255",
+        "gateway": "10.0.0.129"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.64/26"
+      },
+      "expected": {
+        "netmask": "255.255.255.192",
+        "wildcard": "0.0.0.63",
+        "hostMin": "10.0.0.65",
+        "hostMax": "10.0.0.126",
+        "broadcast": "10.0.0.127",
+        "gateway": "10.0.0.65"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.0.4/30"
+      },
+      "expected": {
+        "netmask": "255.255.255.252",
+        "wildcard": "0.0.0.3",
+        "hostMin": "10.0.0.5",
+        "hostMax": "10.0.0.6",
+        "broadcast": "10.0.0.7",
+        "gateway": "10.0.0.5"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "10.0.2.0/23"
+      },
+      "expected": {
+        "netmask": "255.255.254.0",
+        "wildcard": "0.0.1.255",
+        "hostMin": "10.0.2.1",
+        "hostMax": "10.0.3.254",
+        "broadcast": "10.0.3.255",
+        "gateway": "10.0.2.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "172.16.0.0/12"
+      },
+      "expected": {
+        "netmask": "255.240.0.0",
+        "wildcard": "0.15.255.255",
+        "hostMin": "172.16.0.1",
+        "hostMax": "172.31.255.254",
+        "broadcast": "172.31.255.255",
+        "gateway": "172.16.0.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "192.168.10.192/27"
+      },
+      "expected": {
+        "netmask": "255.255.255.224",
+        "wildcard": "0.0.0.31",
+        "hostMin": "192.168.10.193",
+        "hostMax": "192.168.10.222",
+        "broadcast": "192.168.10.223",
+        "gateway": "192.168.10.193"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "192.168.255.0/24"
+      },
+      "expected": {
+        "netmask": "255.255.255.0",
+        "wildcard": "0.0.0.255",
+        "hostMin": "192.168.255.1",
+        "hostMax": "192.168.255.254",
+        "broadcast": "192.168.255.255",
+        "gateway": "192.168.255.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "224.0.0.0/4"
+      },
+      "expected": {
+        "netmask": "240.0.0.0",
+        "wildcard": "15.255.255.255",
+        "hostMin": "224.0.0.1",
+        "hostMax": "239.255.255.254",
+        "broadcast": "239.255.255.255",
+        "gateway": "224.0.0.1"
+      }
+    },
+    {
+      "input": {
+        "networkAddress": "0.0.0.0/0"
+      },
+      "expected": {
+        "netmask": "0.0.0.0",
+        "wildcard": "255.255.255.255",
+        "hostMin": "0.0.0.1",
+        "hostMax": "255.255.255.254",
+        "broadcast": "255.255.255.255",
+        "gateway": "0.0.0.1"
+      }
+    }
+  ]
+}

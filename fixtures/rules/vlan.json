@@ -1,0 +1,250 @@
+{
+  "description": "VLAN reservation rules and per-vendor warnings",
+  "reserved": [
+    0,
+    1002,
+    1003,
+    1004,
+    1005,
+    4095
+  ],
+  "confirmationRequired": [
+    1
+  ],
+  "cases": [
+    {
+      "input": {
+        "vlanId": 0
+      },
+      "expected": {
+        "reserved": true,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 1
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": true,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 2
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 10
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 1001
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 1002
+      },
+      "expected": {
+        "reserved": true,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 1005
+      },
+      "expected": {
+        "reserved": true,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 1006
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": "May conflict with dynamic internal VLAN allocation",
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 3967
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": "May conflict with dynamic internal VLAN allocation",
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 3968
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": "May conflict with dynamic internal VLAN allocation",
+          "juniper-junos": "May conflict with internal VLANs on SRX Ethernet switching",
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 4093
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": "May conflict with dynamic internal VLAN allocation",
+          "juniper-junos": "May conflict with internal VLANs on SRX Ethernet switching",
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 4094
+      },
+      "expected": {
+        "reserved": false,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": "May conflict with dynamic internal VLAN allocation",
+          "juniper-junos": "May conflict with internal VLANs on SRX Ethernet switching",
+          "fortinet": "4094 is FortiLink default management VLAN",
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    },
+    {
+      "input": {
+        "vlanId": 4095
+      },
+      "expected": {
+        "reserved": true,
+        "confirmationRequired": false,
+        "vendorWarnings": {
+          "cisco-ios": null,
+          "cisco-nxos": null,
+          "arista-eos": null,
+          "juniper-junos": null,
+          "fortinet": null,
+          "netgear": null,
+          "ubiquiti": null
+        }
+      }
+    }
+  ]
+}

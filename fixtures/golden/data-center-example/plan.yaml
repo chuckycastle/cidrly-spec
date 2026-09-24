@@ -1,0 +1,82 @@
+# cidrly Network Plan
+# Generated: <timestamp>
+# https://github.com/chuckycastle/cidrly
+
+name: "Data Center Example"
+baseIp: "172.16.0.0"
+growthPercentage: 100
+metadata:
+  createdAt: "<timestamp>"
+  updatedAt: "<timestamp>"
+
+# Subnet Allocation
+subnets:
+  - id: "subnet-1"
+    name: "Web Tier"
+    vlanId: 100
+    devices: 20
+    networkAddress: "172.16.0.0/26"
+    cidrPrefix: 26
+    maxHosts: 62
+    planned: 40
+    requiredHosts: 20
+    subnetSize: 64
+  - id: "subnet-2"
+    name: "Application Tier"
+    vlanId: 110
+    devices: 30
+    networkAddress: "172.16.0.64/26"
+    cidrPrefix: 26
+    maxHosts: 62
+    planned: 60
+    requiredHosts: 30
+    subnetSize: 64
+  - id: "subnet-3"
+    name: "Database Tier"
+    vlanId: 120
+    devices: 10
+    networkAddress: "172.16.0.128/27"
+    cidrPrefix: 27
+    maxHosts: 30
+    planned: 20
+    requiredHosts: 10
+    subnetSize: 32
+  - id: "subnet-4"
+    name: "Storage Network"
+    vlanId: 130
+    devices: 15
+    networkAddress: "172.16.0.160/27"
+    cidrPrefix: 27
+    maxHosts: 30
+    planned: 30
+    requiredHosts: 15
+    subnetSize: 32
+  - id: "subnet-5"
+    name: "Management"
+    vlanId: 140
+    devices: 8
+    networkAddress: "172.16.0.192/27"
+    cidrPrefix: 27
+    maxHosts: 30
+    planned: 16
+    requiredHosts: 8
+    subnetSize: 32
+  - id: "subnet-6"
+    name: "Backup Network"
+    vlanId: 150
+    devices: 5
+    networkAddress: "172.16.0.224/28"
+    cidrPrefix: 28
+    maxHosts: 14
+    planned: 10
+    requiredHosts: 5
+    subnetSize: 16
+
+# Supernet Summary
+supernet:
+  networkAddress: "172.16.0.0/24"
+  cidrPrefix: 24
+  totalSize: 256
+  usedSize: 240
+  utilization: 93.75
+  rangeEfficiency: 100

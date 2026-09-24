@@ -1,0 +1,23 @@
+# Plan Metadata
+# name: Data Center Example
+# baseIp: 172.16.0.0
+# growthPercentage: 100
+# createdAt: <timestamp>
+# updatedAt: <timestamp>
+
+# Subnet Allocation
+name,vlan,devices,description,network_address,cidr_prefix,max_hosts,planned,subnet_size,required_hosts,network_locked,manual_network_address
+Web Tier,100,20,,172.16.0.0,26,62,40,64,20,false,
+Application Tier,110,30,,172.16.0.64,26,62,60,64,30,false,
+Database Tier,120,10,,172.16.0.128,27,30,20,32,10,false,
+Storage Network,130,15,,172.16.0.160,27,30,30,32,15,false,
+Management,140,8,,172.16.0.192,27,30,16,32,8,false,
+Backup Network,150,5,,172.16.0.224,28,14,10,16,5,false,
+
+# Supernet Summary
+# supernet.networkAddress: 172.16.0.0/24
+# supernet.cidrPrefix: 24
+# supernet.totalSize: 256
+# supernet.usedSize: 240
+# supernet.utilization: 93.75
+# supernet.rangeEfficiency: 100.00

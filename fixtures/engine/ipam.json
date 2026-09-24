@@ -1,0 +1,467 @@
+{
+  "description": "IPAM-lite: allocation into assigned blocks (best-fit fragment, aligned) and the resulting free-space report",
+  "cases": [
+    {
+      "name": "single block, two subnets",
+      "input": {
+        "name": "single block, two subnets",
+        "baseIp": "10.1.241.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 50,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 20,
+            "expectedDevices": 10,
+            "networkLocked": false
+          }
+        ],
+        "assignedBlocks": [
+          {
+            "id": "block-1",
+            "networkAddress": "10.1.241.0/24"
+          }
+        ]
+      },
+      "expected": {
+        "allocation": {
+          "subnets": [
+            {
+              "id": "s1",
+              "networkAddress": "10.1.241.0/25",
+              "cidrPrefix": 25,
+              "subnetSize": 128,
+              "plannedDevices": 100,
+              "networkLocked": false
+            },
+            {
+              "id": "s2",
+              "networkAddress": "10.1.241.128/27",
+              "cidrPrefix": 27,
+              "subnetSize": 32,
+              "plannedDevices": 20,
+              "networkLocked": false
+            }
+          ],
+          "supernet": {
+            "networkAddress": "10.1.241.0/24",
+            "cidrPrefix": 24,
+            "totalSize": 256,
+            "usedSize": 160,
+            "utilization": 62.5,
+            "rangeEfficiency": 100
+          }
+        },
+        "spaceReport": {
+          "totalAssignedCapacity": 256,
+          "totalUsedCapacity": 160,
+          "totalAvailableCapacity": 96,
+          "overallUtilizationPercent": 62.5,
+          "blocks": [
+            {
+              "blockId": "block-1",
+              "networkAddress": "10.1.241.0/24",
+              "allocatedSubnetIds": [
+                "s1",
+                "s2"
+              ],
+              "usedCapacity": 160,
+              "availableCapacity": 96,
+              "utilizationPercent": 62.5,
+              "fragments": [
+                "10.1.241.160/27",
+                "10.1.241.192/26"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "two blocks, best fit",
+      "input": {
+        "name": "two blocks, best fit",
+        "baseIp": "10.1.241.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "Big",
+            "vlanId": 10,
+            "expectedDevices": 400,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "Small",
+            "vlanId": 20,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "Medium",
+            "vlanId": 30,
+            "expectedDevices": 100,
+            "networkLocked": false
+          }
+        ],
+        "assignedBlocks": [
+          {
+            "id": "block-1",
+            "networkAddress": "10.1.244.0/22"
+          },
+          {
+            "id": "block-2",
+            "networkAddress": "10.1.241.0/24"
+          }
+        ]
+      },
+      "expected": {
+        "allocation": {
+          "subnets": [
+            {
+              "id": "s1",
+              "networkAddress": "10.1.244.0/22",
+              "cidrPrefix": 22,
+              "subnetSize": 1024,
+              "plannedDevices": 800,
+              "networkLocked": false
+            },
+            {
+              "id": "s2",
+              "networkAddress": null,
+              "cidrPrefix": 27,
+              "subnetSize": 32,
+              "plannedDevices": 20,
+              "networkLocked": false
+            },
+            {
+              "id": "s3",
+              "networkAddress": "10.1.241.0/24",
+              "cidrPrefix": 24,
+              "subnetSize": 256,
+              "plannedDevices": 200,
+              "networkLocked": false
+            }
+          ],
+          "supernet": {
+            "networkAddress": "10.1.240.0/21",
+            "cidrPrefix": 21,
+            "totalSize": 2048,
+            "usedSize": 1312,
+            "utilization": 64.0625,
+            "rangeEfficiency": 73.214286
+          }
+        },
+        "spaceReport": {
+          "totalAssignedCapacity": 1280,
+          "totalUsedCapacity": 1280,
+          "totalAvailableCapacity": 0,
+          "overallUtilizationPercent": 100,
+          "blocks": [
+            {
+              "blockId": "block-1",
+              "networkAddress": "10.1.244.0/22",
+              "allocatedSubnetIds": [
+                "s1"
+              ],
+              "usedCapacity": 1024,
+              "availableCapacity": 0,
+              "utilizationPercent": 100,
+              "fragments": []
+            },
+            {
+              "blockId": "block-2",
+              "networkAddress": "10.1.241.0/24",
+              "allocatedSubnetIds": [
+                "s3"
+              ],
+              "usedCapacity": 256,
+              "availableCapacity": 0,
+              "utilizationPercent": 100,
+              "fragments": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "block above 128.0.0.0",
+      "input": {
+        "name": "block above 128.0.0.0",
+        "baseIp": "192.168.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "A",
+            "vlanId": 10,
+            "expectedDevices": 50,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "B",
+            "vlanId": 20,
+            "expectedDevices": 50,
+            "networkLocked": false
+          }
+        ],
+        "assignedBlocks": [
+          {
+            "id": "block-1",
+            "networkAddress": "192.168.0.0/16"
+          }
+        ]
+      },
+      "expected": {
+        "allocation": {
+          "subnets": [
+            {
+              "id": "s1",
+              "networkAddress": "192.168.0.0/25",
+              "cidrPrefix": 25,
+              "subnetSize": 128,
+              "plannedDevices": 100,
+              "networkLocked": false
+            },
+            {
+              "id": "s2",
+              "networkAddress": "192.168.0.128/25",
+              "cidrPrefix": 25,
+              "subnetSize": 128,
+              "plannedDevices": 100,
+              "networkLocked": false
+            }
+          ],
+          "supernet": {
+            "networkAddress": "192.168.0.0/24",
+            "cidrPrefix": 24,
+            "totalSize": 256,
+            "usedSize": 256,
+            "utilization": 100,
+            "rangeEfficiency": 100
+          }
+        },
+        "spaceReport": {
+          "totalAssignedCapacity": 65536,
+          "totalUsedCapacity": 256,
+          "totalAvailableCapacity": 65280,
+          "overallUtilizationPercent": 0.390625,
+          "blocks": [
+            {
+              "blockId": "block-1",
+              "networkAddress": "192.168.0.0/16",
+              "allocatedSubnetIds": [
+                "s1",
+                "s2"
+              ],
+              "usedCapacity": 256,
+              "availableCapacity": 65280,
+              "utilizationPercent": 0.390625,
+              "fragments": [
+                "192.168.1.0/24",
+                "192.168.2.0/23",
+                "192.168.4.0/22",
+                "192.168.8.0/21",
+                "192.168.16.0/20",
+                "192.168.32.0/19",
+                "192.168.64.0/18",
+                "192.168.128.0/17"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "does not fit",
+      "input": {
+        "name": "does not fit",
+        "baseIp": "10.5.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "Fits",
+            "vlanId": 10,
+            "expectedDevices": 10,
+            "networkLocked": false
+          },
+          {
+            "id": "s2",
+            "name": "Too big",
+            "vlanId": 20,
+            "expectedDevices": 200,
+            "networkLocked": false
+          }
+        ],
+        "assignedBlocks": [
+          {
+            "id": "block-1",
+            "networkAddress": "10.5.0.0/26"
+          }
+        ]
+      },
+      "expected": {
+        "allocation": {
+          "subnets": [
+            {
+              "id": "s1",
+              "networkAddress": "10.5.0.0/27",
+              "cidrPrefix": 27,
+              "subnetSize": 32,
+              "plannedDevices": 20,
+              "networkLocked": false
+            },
+            {
+              "id": "s2",
+              "networkAddress": null,
+              "cidrPrefix": 23,
+              "subnetSize": 512,
+              "plannedDevices": 400,
+              "networkLocked": false
+            }
+          ],
+          "supernet": {
+            "networkAddress": "10.5.0.0/27",
+            "cidrPrefix": 27,
+            "totalSize": 32,
+            "usedSize": 544,
+            "utilization": 1700,
+            "rangeEfficiency": 1700
+          }
+        },
+        "spaceReport": {
+          "totalAssignedCapacity": 64,
+          "totalUsedCapacity": 32,
+          "totalAvailableCapacity": 32,
+          "overallUtilizationPercent": 50,
+          "blocks": [
+            {
+              "blockId": "block-1",
+              "networkAddress": "10.5.0.0/26",
+              "allocatedSubnetIds": [
+                "s1"
+              ],
+              "usedCapacity": 32,
+              "availableCapacity": 32,
+              "utilizationPercent": 50,
+              "fragments": [
+                "10.5.0.32/27"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "locked subnet inside block",
+      "input": {
+        "name": "locked subnet inside block",
+        "baseIp": "10.9.0.0",
+        "growthPercentage": 100,
+        "subnets": [
+          {
+            "id": "s1",
+            "name": "Locked",
+            "vlanId": 10,
+            "expectedDevices": 20,
+            "networkLocked": true,
+            "manualNetworkAddress": "10.9.0.64/26"
+          },
+          {
+            "id": "s2",
+            "name": "A",
+            "vlanId": 20,
+            "expectedDevices": 50,
+            "networkLocked": false
+          },
+          {
+            "id": "s3",
+            "name": "B",
+            "vlanId": 30,
+            "expectedDevices": 5,
+            "networkLocked": false
+          }
+        ],
+        "assignedBlocks": [
+          {
+            "id": "block-1",
+            "networkAddress": "10.9.0.0/24"
+          }
+        ]
+      },
+      "expected": {
+        "allocation": {
+          "subnets": [
+            {
+              "id": "s1",
+              "networkAddress": "10.9.0.64/26",
+              "cidrPrefix": 26,
+              "subnetSize": 64,
+              "plannedDevices": 40,
+              "networkLocked": true
+            },
+            {
+              "id": "s2",
+              "networkAddress": "10.9.0.128/25",
+              "cidrPrefix": 25,
+              "subnetSize": 128,
+              "plannedDevices": 100,
+              "networkLocked": false
+            },
+            {
+              "id": "s3",
+              "networkAddress": "10.9.0.0/28",
+              "cidrPrefix": 28,
+              "subnetSize": 16,
+              "plannedDevices": 10,
+              "networkLocked": false
+            }
+          ],
+          "supernet": {
+            "networkAddress": "10.9.0.0/24",
+            "cidrPrefix": 24,
+            "totalSize": 256,
+            "usedSize": 208,
+            "utilization": 81.25,
+            "rangeEfficiency": 81.25
+          }
+        },
+        "spaceReport": {
+          "totalAssignedCapacity": 256,
+          "totalUsedCapacity": 208,
+          "totalAvailableCapacity": 48,
+          "overallUtilizationPercent": 81.25,
+          "blocks": [
+            {
+              "blockId": "block-1",
+              "networkAddress": "10.9.0.0/24",
+              "allocatedSubnetIds": [
+                "s1",
+                "s2",
+                "s3"
+              ],
+              "usedCapacity": 208,
+              "availableCapacity": 48,
+              "utilizationPercent": 81.25,
+              "fragments": [
+                "10.9.0.16/28",
+                "10.9.0.32/27"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
