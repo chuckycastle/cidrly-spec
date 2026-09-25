@@ -1,0 +1,68 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Fixtures are well-formed and match the schema
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      - name: Every fixture parses and lists itself in the manifest
+        run: |
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import path from "node:path";
+            const root = "fixtures";
+            const manifest = JSON.parse(fs.readFileSync(path.join(root, "manifest.json"), "utf8"));
+            const listed = new Set(manifest.files);
+            const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+              e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]);
+            let failures = 0;
+            for (const file of walk(root)) {
+              const rel = path.relative(root, file);
+              if (rel === "manifest.json") continue;
+              if (!listed.has(rel)) { console.error("not in manifest:", rel); failures++; }
+              if (rel.endsWith(".json")) {
+                try { const d = JSON.parse(fs.readFileSync(file, "utf8"));
+                  if (!Array.isArray(d.cases)) { console.error("no cases[]:", rel); failures++; } }
+                catch (e) { console.error("invalid JSON:", rel, e.message); failures++; }
+              }
+            }
+            for (const rel of listed) {
+              if (!fs.existsSync(path.join(root, rel))) { console.error("listed but missing:", rel); failures++; }
+            }
+            if (failures) process.exit(1);
+            console.log(`OK: ${listed.size} fixture files`);
+          '
+
+      - name: Plan files in fixtures validate against the v2 schema
+        run: |
+          npm install --no-save --no-audit --no-fund ajv@8 ajv-formats@3 > /dev/null
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import Ajv from "ajv/dist/2020.js";
+            import addFormats from "ajv-formats";
+            const ajv = new Ajv({ strict: false, allErrors: true });
+            addFormats(ajv);
+            const schema = JSON.parse(fs.readFileSync("schema/plan-v2.schema.json", "utf8"));
+            const validate = ajv.compile(schema);
+            const fixture = JSON.parse(fs.readFileSync("fixtures/format/plan-file.json", "utf8"));
+            let failures = 0;
+            for (const c of fixture.cases) {
+              if (!validate(c.input)) { console.error(c.name, validate.errors); failures++; }
+            }
+            if (failures) process.exit(1);
+            console.log(`OK: ${fixture.cases.length} plan files validate`);
+          '
